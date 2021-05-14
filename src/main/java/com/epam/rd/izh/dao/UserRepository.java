@@ -1,4 +1,4 @@
-package com.epam.rd.izh.repository;
+package com.epam.rd.izh.dao;
 
 import com.epam.rd.izh.entity.AuthorizedUser;
 import java.util.ArrayList;

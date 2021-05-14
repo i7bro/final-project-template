@@ -1,7 +1,7 @@
 package com.epam.rd.izh.controller;
 
 import com.epam.rd.izh.entity.AuthorizedUser;
-import com.epam.rd.izh.repository.UserRepository;
+import com.epam.rd.izh.dao.UserRepository;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;

@@ -6,6 +6,9 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * <p>Класс с main методом.
  * <p>Аннотация @SpringBootApplication является мета-аннотацией, т.е. по сути, является алиасом для нескольких аннотаций:
@@ -17,7 +20,12 @@ import org.springframework.context.annotation.ComponentScan;
  */
 @SpringBootApplication
 public class RDIzhFinalProjectTemplate {
-	public static void main(String[] args) {
+
+	public static String one;
+	public static String two;
+	public static String three;
+
+	public static void main(String[] args) { {}
 		SpringApplication.run(RDIzhFinalProjectTemplate.class, args);
 	}
 }
