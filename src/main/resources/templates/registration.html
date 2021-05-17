@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:form="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../../css/css.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          crossorigin="anonymous">
+    <title>Registration</title>
+</head>
+<body>
+<nav class="navbar navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">
+        <img src="../../img/logo.png" width="30" height="30" class="align-top" alt="">
+        Tours shop
+    </a>
+</nav>
+
+
+<div style="margin-right: 2vw; margin-left: 2vw;">
+    <div class="row">
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4" style="margin-top: 5vh">
+            <form action="registration/proceed" method="post" modelAttribute="registrationForm">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="inputLogin">Your login</label>
+                        <input name="login" type="text" class="form-control" id="inputLogin" placeholder="Login">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputEmail">Your email</label>
+                        <input name="email" type="email" class="form-control" id="inputEmail" placeholder="Email">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputFirstName">First name</label>
+                    <input name="firstName" type="text" class="form-control" id="inputFirstName" placeholder="First name">
+                </div>
+                <div class="form-group">
+                    <label for="inputLastName">Last name</label>
+                    <input name="lastName" type="text" class="form-control" id="inputLastName" placeholder="Last name">
+                </div>
+                <div class="form-group">
+                    <label for="inputPhone">Your phone</label>
+                        <input name="phone" type="tel" class="form-control" id="inputPhone" placeholder="+7 XXX XXX XX XX">
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword1">New password</label>
+                    <input name="password" type="password" class="form-control" id="inputPassword1" placeholder="Password">
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword2">Same password</label>
+                    <input  type="password" class="form-control" id="inputPassword2" placeholder="Password" disabled="disabled">
+                </div>
+                <button type="submit" class="btn btn-success">Sign in</button>
+            </form>
+        </div>
+        <div class="col-md-4">
+        </div>
+    </div>
+</div>
+
+
+<script src="../../js/jquery.js"></script>
+<script src="../../js/scriptReg.js"></script>
+</body>
+</html> 

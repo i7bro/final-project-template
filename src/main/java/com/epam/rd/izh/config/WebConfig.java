@@ -6,16 +6,16 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.*;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 
 import javax.sql.DataSource;
+import java.nio.charset.StandardCharsets;
 
 /**
  * Данный класс можно использовать для создание бинов приложения, например бин ObjectMapper для десериализации.
@@ -23,51 +23,12 @@ import javax.sql.DataSource;
  */
 
 @Configuration
-@ComponentScan("com.epam.rd.izh")
-@EnableWebMvc
 public class WebConfig implements WebMvcConfigurer {
-
-    private static final String VIEW_PREFIX_KEY = "spring.mvc.view.prefix";
-    private static final String VIEW_SUFFIX_KEY = "spring.mvc.view.suffix";
 
     private static final String URL_KEY = "db.mysql.url";
     private static final String USER_KEY = "db.mysql.user";
     private static final String PASSWORD_KEY = "db.mysql.password";
     private static final String DRIVER_KEY = "db.mysql.driver";
-
-    private final ApplicationContext applicationContext;
-
-    @Autowired
-    public WebConfig(ApplicationContext applicationContext) {
-        this.applicationContext = applicationContext;
-    }
-
-    @Bean
-    public SpringResourceTemplateResolver templateResolver() {
-        SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
-
-        templateResolver.setApplicationContext(applicationContext);
-        templateResolver.setPrefix(PropertiesUtil.getProperty(VIEW_PREFIX_KEY));
-        templateResolver.setSuffix(PropertiesUtil.getProperty(VIEW_SUFFIX_KEY));
-        return templateResolver;
-    }
-
-    @Bean
-    public SpringTemplateEngine templateEngine() {
-        SpringTemplateEngine templateEngine = new SpringTemplateEngine();
-
-        templateEngine.setTemplateResolver(templateResolver());
-        templateEngine.setEnableSpringELCompiler(true);
-        return templateEngine;
-    }
-
-    @Bean
-    public void configureViewResolvers(ViewResolverRegistry resolverRegistry) {
-        ThymeleafViewResolver resolver = new ThymeleafViewResolver();
-
-        resolver.setTemplateEngine(templateEngine());
-        resolverRegistry.viewResolver(resolver);
-    }
 
     @Bean
     public DataSource dataSource() {

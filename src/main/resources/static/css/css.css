@@ -1,0 +1,19 @@
+main {
+    margin-top: 55px;
+}
+
+#p-img {
+    font-size: 1.5vw;
+}
+
+#h-img {
+    font-size: 1.7vw;
+}
+
+#btn-img {
+    margin-bottom: 0px;
+}
+
+.tour-color {
+    color: red;
+}
