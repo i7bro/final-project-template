@@ -18,6 +18,7 @@ import java.util.Optional;
 @Repository
 public class UserDao implements Dao<Integer, User> {
 
+    @Autowired
     private final JdbcTemplate jdbcTemplate;
 
     private static final String FIND_ALL_SQL =
@@ -107,7 +108,6 @@ public class UserDao implements Dao<Integer, User> {
 
         entity.setId(Objects.requireNonNull(id.getKey()).intValue());
 
-        System.out.println(entity);
         return entity;
     }
 

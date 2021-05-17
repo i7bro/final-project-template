@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import com.epam.rd.izh.dto.UserLoginDto;
 import com.epam.rd.izh.entity.User;
+import com.epam.rd.izh.service.UserService;
 import com.epam.rd.izh.util.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -28,7 +29,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class AuthenticationController {
 
     @Autowired
-    UserDao userDao;
+    UserService userService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -96,7 +97,7 @@ public class AuthenticationController {
          * Добавление пользователя в репозиторий или в базу данных через CRUD операции DAO.
          * Рекомендуется вынести эту логику на сервисный слой.
          */
-        userDao.save(registeredUser);
+        userService.saveUser(registeredUser);
         /**
          * В случае успешной регистрации редирект можно настроить на другой энд пойнт.
          */

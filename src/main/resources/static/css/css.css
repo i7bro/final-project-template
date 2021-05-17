@@ -17,3 +17,7 @@ main {
 .tour-color {
     color: red;
 }
+
+#registrationBtn {
+    margin-left: 15px;
+}

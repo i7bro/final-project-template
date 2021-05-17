@@ -48,13 +48,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .passwordParameter("password")
 
                 .and()
+                .logout()
+                .invalidateHttpSession(true)
+                .clearAuthentication(true)
+                .deleteCookies("JSESSIONID")
+
+
+                .and()
                 .csrf().disable();
 //
 //                /**
 //                 * Включение функции выхода из текущей сессии.
 //                 */
-//                .and()
-//                .logout();
     }
 
     @Override

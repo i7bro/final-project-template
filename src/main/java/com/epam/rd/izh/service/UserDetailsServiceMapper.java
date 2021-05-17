@@ -5,7 +5,6 @@ import com.epam.rd.izh.dao.UserDao;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.epam.rd.izh.util.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -38,7 +37,6 @@ public class UserDetailsServiceMapper implements UserDetailsService {
 
   @Override
   public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
-
     com.epam.rd.izh.entity.User authorizedUserDto = userRepository.findByLogin(login).orElse(null);
     if (authorizedUserDto == null) throw new UsernameNotFoundException("No user with this login");
 
