@@ -1,4 +1,4 @@
-main {
+body {
     margin-top: 55px;
 }
 
@@ -18,6 +18,6 @@ main {
     color: red;
 }
 
-#registrationBtn {
+#registrationBtn, #returnBtn {
     margin-left: 15px;
 }

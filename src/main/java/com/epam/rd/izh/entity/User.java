@@ -16,6 +16,8 @@ public class User {
     private String password;
     private Role role;
 
+    public User() {}
+
     public static class Builder {
 
         User user = new User();

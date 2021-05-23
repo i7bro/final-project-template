@@ -16,10 +16,10 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Repository
-public class UserDao implements Dao<Integer, User> {
+public class UserDao {
 
     @Autowired
-    private final JdbcTemplate jdbcTemplate;
+    JdbcTemplate jdbcTemplate;
 
     private static final String FIND_ALL_SQL =
             "select id, " +
@@ -62,18 +62,15 @@ public class UserDao implements Dao<Integer, User> {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    @Override
     public List<User> findAll() {
         return jdbcTemplate.query(FIND_ALL_SQL, new BeanPropertyRowMapper<>(User.class));
     }
 
-    @Override
     public Optional<User> findById(Integer id) {
         return jdbcTemplate.query(FIND_BY_ID_SQL, new BeanPropertyRowMapper<>(User.class), id)
                 .stream().findAny();
     }
 
-    @Override
     public void update(User entity) {
         jdbcTemplate.update(
                 UPDATE_SQL,
@@ -88,7 +85,6 @@ public class UserDao implements Dao<Integer, User> {
         );
     }
 
-    @Override
     public User save(User entity) {
         KeyHolder id = new GeneratedKeyHolder();
 
@@ -111,7 +107,7 @@ public class UserDao implements Dao<Integer, User> {
         return entity;
     }
 
-    @Override
+
     public void delete(Integer id) {
         jdbcTemplate.update(DELETE_SQL, id);
     }

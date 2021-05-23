@@ -4,7 +4,7 @@ let login = $('#inputLogin'),
     classes = login.attr('class');
 
 loginJS.addEventListener('input', () => {
-    isValid(login, classes, 3);
+    isValid(login, classes, 1);
 })
 
 let fNameJS = document.getElementById('inputFirstName'),
@@ -44,8 +44,8 @@ passwordJS2.addEventListener('input', () => {
     let classesCurrent = password2.attr('class');
 
     if (password2.val() != password1.val()) {
-        if (!classesCurrent.includes('is-invalid')) {
-            password2.attr('class', password2Classes + ' is-invalid');
+        if (!classesCurrent.includes('is-innvalid')) {
+            password2.attr('class', password2Classes + ' is-innvalid');
             nextElement.remove();
             password2.after('<div class="invalid-feedback">Passwords is not same</div>');
 
@@ -104,8 +104,8 @@ email.blur(() => {
     let classesCurrent = email.attr('class');
 
     if (!validateEmail(email.val())) {
-        if (!classesCurrent.includes('is-invalid')) {
-            email.attr('class', emailClasses + ' is-invalid');
+        if (!classesCurrent.includes('is-innvalid')) {
+            email.attr('class', emailClasses + ' is-innvalid');
             nextElement.remove();
             email.after('<div class="invalid-feedback">Please set valid email</div>');
             ;
@@ -114,14 +114,14 @@ email.blur(() => {
         if (!classesCurrent.includes('is-valid')) {
             email.attr('class', emailClasses + ' is-valid');
             nextElement.remove();
-
         }
     }
 })
 
 
-let button = $('button');
+let button = $('#submitBtn');
 let buttonCl = button.attr('class');
+let buttonRtrn = $('#returnBtn');
 
 button.click((e) => {
 
@@ -144,11 +144,15 @@ button.click((e) => {
         !isIncludeValid(phoneCl)) {
 
         e.preventDefault();
-        if (!classCurrent.includes('is-invalid')) {
-            button.attr('class', buttonCl + ' is-invalid');
-            button.after('<div style="color: red; font-sixe: 5px; margin-top: 4px;">Please check form</div>');
+        if (!classCurrent.includes('is-innvalid')) {
+            button.attr('class', buttonCl + ' is-innvalid');
+            buttonRtrn.after('<div style="color: red; font-sixe: 5px; margin-top: 4px;">Please check form</div>');
         }
     }
+})
+
+buttonRtrn.click(() => {
+    window.location.href = '/';
 })
 
 
@@ -158,8 +162,8 @@ function isValid(element, classes, length) {
     let classesCurrent = element.attr('class');
 
     if (element.val().length < length) {
-        if (!classesCurrent.includes('is-invalid')) {
-            element.attr('class', classes + ' is-invalid');
+        if (!classesCurrent.includes('is-innvalid')) {
+            element.attr('class', classes + ' is-innvalid');
             nextElement.remove();
             element.after('<div class="invalid-feedback">Please enter more ' + length + ' chars</div>');
 
@@ -167,7 +171,6 @@ function isValid(element, classes, length) {
     } else {
         if (!classesCurrent.includes('is-valid')) {
             element.attr('class', classes + ' is-valid');
-
         }
     }
 }

@@ -17,12 +17,10 @@ public class IndexController {
     this.userService = userService;
   }
 
-  @GetMapping("/main")
+  @GetMapping("/")
   public String login(Authentication authentication, Model model) {
-//    Message greetingMessage = new Message();
-//    greetingMessage.setMessage(ENG_GREETING + authentication.getName());
-//
-    model.addAttribute("user", userService.getUserByLogin(authentication.getName()));
+
+    model.addAttribute("userName", authentication.getName());
     return "main";
   }
 
