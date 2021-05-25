@@ -83,6 +83,26 @@ public class Tour {
         return notice;
     }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setRoute(Integer route) {
+        this.route = route;
+    }
+
+    public void setCost(Integer cost) {
+        this.cost = cost;
+    }
+
+    public void setNotice(String notice) {
+        this.notice = notice;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
