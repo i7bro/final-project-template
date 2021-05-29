@@ -26,4 +26,8 @@ public final class UserService {
     public void saveUser(User user) {
         userDao.save(user);
     }
+
+    public boolean hasSameLogin(User user) {
+        return getUserByLogin(user.getLogin()) != null;
+    }
 }

@@ -1,4 +1,4 @@
-<nav th:fragment="nav" class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+<nav th:fragment="nav_full" class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
   <a class="navbar-brand" href="/">
     <img src="img/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
     Tours shop
@@ -13,7 +13,7 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle-split" href="#" id="navbarDropdownMenuLink0"
              data-toggle="dropdown"
-             aria-haspopup="true" aria-expanded="false" th:text="${userName}">
+             aria-haspopup="true" aria-expanded="false" th:text="${user}">
             User
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink0">
