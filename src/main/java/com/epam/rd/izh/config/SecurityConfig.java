@@ -2,9 +2,11 @@ package com.epam.rd.izh.config;
 
 import com.epam.rd.izh.entity.User;
 import com.epam.rd.izh.service.UserDetailsServiceMapper;
+import com.epam.rd.izh.util.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -31,6 +33,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login").anonymous()
                 .antMatchers("/registration").permitAll()
                 .antMatchers("/registration/**").permitAll()
+//                .antMatchers("/tours/edit_tour").hasRole(Role.ADMIN.name())
+//                .antMatchers("/tours/delete/*").hasRole(Role.ADMIN.name())
+                .antMatchers(HttpMethod.GET, "/new_tour/").hasRole(Role.ADMIN.name())
+
 
                 .antMatchers("/css/**").permitAll()
                 .antMatchers("/js/**").permitAll()

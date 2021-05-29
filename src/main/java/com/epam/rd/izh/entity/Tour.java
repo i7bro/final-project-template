@@ -1,5 +1,9 @@
 package com.epam.rd.izh.entity;
 
+import org.hibernate.validator.constraints.Range;
+
+import javax.validation.constraints.Pattern;
+import java.util.Iterator;
 import java.util.Objects;
 
 public class Tour {
@@ -23,6 +27,11 @@ public class Tour {
 
         public Builder title(String title) {
             tour.title = title;
+            return this;
+        }
+
+        public Builder id(Integer id) {
+            tour.id = id;
             return this;
         }
 

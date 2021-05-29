@@ -21,8 +21,26 @@ public class TourDao {
     private static final String SAVE_SQL =
             "insert into tours (title, description, route, cost, notice) " +
             "values (?, ?, ?, ?, ?)";
+    private static final String UPDATE_SQL =
+            "update tours set title = ?, description = ?, route = ?, cost = ?, notice = ? where id = ?";
+    private static final String DELETE_SQL = "delete from tours where id = ?";
+    private static final String INSERT_SQL =
+            "insert into tours (title, description, route, cost, notice) values (?, ?, ?, ?, ?)";
 
     public List<Tour> findAll() {
         return jdbcTemplate.query(FIND_ALL_SQL, new BeanPropertyRowMapper<>(Tour.class));
+    }
+
+    public void updateTour(Tour tour) {
+        jdbcTemplate.update(UPDATE_SQL,
+                tour.getTitle(), tour.getDescription(), tour.getRoute(), tour.getCost(), tour.getNotice(), tour.getId());
+    }
+
+    public void delete(Integer id) {
+        jdbcTemplate.update(DELETE_SQL, id);
+    }
+
+    public void save(Tour tour) {
+        jdbcTemplate.update(INSERT_SQL, tour.getTitle(), tour.getDescription(), tour.getRoute(), tour.getCost(), tour.getNotice());
     }
 }

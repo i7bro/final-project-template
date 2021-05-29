@@ -1,5 +1,6 @@
 body {
     margin-top: 55px;
+    padding-bottom: 100px;
 }
 
 #p-img {
@@ -20,4 +21,27 @@ body {
 
 #registrationBtn, #returnBtn {
     margin-left: 15px;
+}
+
+.modal-header {
+    background-color: #fafafa;
+}
+
+.modal-body table input, textarea {
+    width: 500px;
+}
+
+#footer{
+    position: fixed;
+    left: 0; bottom: 0;
+    padding: 10px;
+    background: #fafafa;
+    color: black;
+    width: 100%;
+    text-align: center;
+    margin-top: 50px;
+}
+
+#footer a {
+    text-decoration: none;
 }

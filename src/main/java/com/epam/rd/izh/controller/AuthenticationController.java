@@ -92,8 +92,6 @@ public class AuthenticationController {
          * Здесь происходит присвоение роли пользователю и шифрование пароля.
          * Роль может быть так же определена пользователем на этапе регистрации, либо иным способов, зависящим
          * от темы финального проекта.
-         * registeredUser может быть DTO объектом, преобразуемым в AuthorizedUser сущность в сервисе-маппере
-         * (эот сервис нужно написать самим), вместе с присвоением роли и шифрованием пароля.
          */
         registeredUser.setRole(Role.USER);
         registeredUser.setPassword(passwordEncoder.encode(registeredUser.getPassword()));

@@ -1,84 +1,176 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <nav th:fragment="nav_full" class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
-  <a class="navbar-brand" href="/">
-    <img src="img/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
-    Tours shop
-  </a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-          aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNavDropdown">
-    <div>
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle-split" href="#" id="navbarDropdownMenuLink0"
-             data-toggle="dropdown"
-             aria-haspopup="true" aria-expanded="false" th:text="${user}">
-            User
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink0">
-            <a class="dropdown-item" href="/settings">Settings</a>
-            <a class="dropdown-item" href="/user-tours">My tours</a>
-            <a class="dropdown-item" href="/logout">Logout</a>
-          </div>
-        </li>
-      </ul>
+    <a class="navbar-brand" href="/">
+        <img src="img/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+        Tours shop
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <div>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle-split" href="#" id="navbarDropdownMenuLink0"
+                       data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false" th:text="${user}">
+                        User
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink0">
+                        <a class="dropdown-item" href="/settings">Settings</a>
+                        <a class="dropdown-item" href="/user-tours">My tours</a>
+                        <a class="dropdown-item" href="/logout">Logout</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink1" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    Ural
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink1">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    Kavkaz
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink3" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    Kamchatka
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink3">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink4" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    Crimea
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink4">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/tours">All&nbsp;tours<span class="sr-only"></span></a>
+            </li>
+        </ul>
     </div>
-    <ul class="navbar-nav ml-auto">
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink1" data-toggle="dropdown"
-           aria-haspopup="true" aria-expanded="false">
-          Ural
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink1">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown"
-           aria-haspopup="true" aria-expanded="false">
-          Kavkaz
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink3" data-toggle="dropdown"
-           aria-haspopup="true" aria-expanded="false">
-          Kamchatka
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink3">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink4" data-toggle="dropdown"
-           aria-haspopup="true" aria-expanded="false">
-          Crimea
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink4">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="/tours">All&nbsp;tours<span class="sr-only"></span></a>
-      </li>
-    </ul>
-  </div>
 </nav>
 
 <nav th:fragment="nav_empty" class="navbar navbar-dark bg-dark">
-  <a class="navbar-brand" href="/">
-    <img src="/img/logo.png" width="30" height="30" class="align-top" alt="">
-    Tours shop
-  </a>
+    <a class="navbar-brand" href="/">
+        <img src="/img/logo.png" width="30" height="30" class="align-top" alt="">
+        Tours shop
+    </a>
 </nav>
+
+
+<button th:if="${role} == 'USER'" th:fragment="modal_btn_user" type="button" class="btn btn-light" data-toggle="modal"
+        th:data-target="'#modal'+${card.getId()}"
+        style="margin: 5px;">
+    Detailes
+</button>
+<div th:if="${role} == 'USER'" th:fragment="modal_user" class="modal fade" th:id="'modal'+${card.getId()}"
+     data-backdrop="modal" data-keyboard="true" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 th:text="${card.getTitle()}" class="modal-title" id="staticBackdropLabel">Modal title</h5>
+            </div>
+            <div class="modal-body">
+                <p>
+                    Description: <span th:text="${card.getDescription()}"></span>;
+                </p>
+                <p>
+                    Route: <span th:text="${card.getRoute()}"></span> miles;
+                </p>
+                <p>
+                    Notice: <span th:text="${card.getNotice()}"></span>;
+                </p>
+                <p>
+                    Price: <span th:text="${card.getCost()}"></span> rubles;
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-light">Add to basket</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<button th:if="${role} == 'ADMIN'" th:fragment="modal_btn_admin" type="button" class="btn btn-light" data-toggle="modal"
+        th:data-target="'#modal'+${card.getId()}+'adm'" style="margin: 5px;">
+    Edit tour
+</button>
+<div th:if="${role} == 'ADMIN'" th:fragment="modal_admin" class="modal fade" th:id="'modal'+${card.getId()}+'adm'"
+     data-backdrop="modal" data-keyboard="true" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-lg">
+        <div class="modal-content">
+            <form method="post" action="tours/edit_tour" modelAttribute="editTourForm"
+                  th:id="'tourForm'+${card.getId()}">
+                <div class="modal-header">
+                    <div class="modal-title">
+                        <span>Title:</span><input th:value="${card.getTitle()}" name="title" required>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <input th:value="${card.getId()}" name="id" hidden/>
+                    <table>
+                        <tr>
+                            <td>Description:</td>
+                            <td><textarea th:text="${card.getDescription()}" name="description" rows="2"
+                                          required></textarea></td>
+                        </tr>
+                        <tr>
+                            <td>Route:</td>
+                            <td><input th:value="${card.getRoute()}" name="route" class="inputNumber" type="number" required/></td>
+                        </tr>
+                        <tr>
+                            <td>Notice:</td>
+                            <td><textarea th:text="${card.getNotice()}" name="notice" rows="2" required></textarea></td>
+                        </tr>
+                        <tr>
+                            <td>Price:</td>
+                            <td><input th:value="${card.getCost()}" name="cost" class="inputNumber" type="number" required/></td>
+                        </tr>
+                    </table>
+                </div>
+            </form>
+            <div class="modal-footer">
+                <form th:method="post" th:action="@{/tours/delete/{id}(id=${card.getId()})}" class="mr-auto">
+                    <button type="submit" class="btn btn-danger">Delete tour</button>
+                </form>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button th:form="'tourForm'+${card.getId()}" type="submit" class="btn btn-light">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</html>
