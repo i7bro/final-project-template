@@ -13,6 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -39,7 +40,7 @@ public class AuthenticationController {
      * /login - определяет URL, по которому пользователь должен перейти, чтобы запустить данный метод-обработчик.
      */
     @GetMapping("/login")
-    public String login(Model model, @RequestParam(required = false) String error) {
+    public String login(Model model, @RequestParam(required = false) String error, @RequestParam(required = false) String success) {
         if (error != null) {
             /**
              * Model представляет из себя Map коллекцию ключ-значения, распознаваемую View элементами MVC.
@@ -50,6 +51,9 @@ public class AuthenticationController {
              */
             model.addAttribute("error_login_placeholder", "invalid login or password!");
         }
+        if (success != null) {
+            model.addAttribute("success", success);
+        }
         return "login";
     }
 
@@ -57,7 +61,11 @@ public class AuthenticationController {
      * Метод, отвечающий за логику регистрации пользователя.
      */
     @GetMapping("/registration")
-    public String viewRegistration(Model model) {
+    public String viewRegistration(Model model, @RequestParam(required = false) String error) {
+
+        if (error != null) {
+            model.addAttribute("error_login_exists", error);
+        }
         if (!model.containsAttribute("registrationForm")) {
             model.addAttribute("registrationForm", new User());
         }
@@ -71,16 +79,13 @@ public class AuthenticationController {
     public String processRegistration(@Valid @ModelAttribute("registrationForm") User registeredUser,
                                       BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 
-        /**
-         * Здесь по желанию можно добавить валидацию введенных данных на back-end слое.
-         * Для этого необходимо написать реализацию Validator.
-         */
-        //registeredUser.validate(registeredUserDto, bindingResult);
+        if (userService.hasSameLogin(registeredUser)) {
+            ObjectError error = new ObjectError("login_already_exists", "Login already exists, please, create new login");
+            bindingResult.addError(error);
+            redirectAttributes.addAttribute("error", "Login already exists, please, create new login");
+        }
 
         if (bindingResult.hasErrors()) {
-            //логика отображения ошибки, не является обязательной
-            //...
-            //...
             return "redirect:/registration";
         }
         /**
@@ -101,6 +106,7 @@ public class AuthenticationController {
         /**
          * В случае успешной регистрации редирект можно настроить на другой энд пойнт.
          */
+        redirectAttributes.addAttribute("success", "Registration is successful. Enter your login and password");
         return "redirect:/login";
     }
 

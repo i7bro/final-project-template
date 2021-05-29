@@ -21,7 +21,8 @@ public class SettingsController {
     @GetMapping("/settings")
     public String viewSettings(Authentication authentication, Model model) {
         User user = userService.getUserByLogin(authentication.getName());
-        model.addAttribute("user", user);
+        model.addAttribute("user", user.getLogin());
+        model.addAttribute("userCur", user);
 
         return "settings";
     }
