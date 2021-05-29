@@ -1,9 +1,9 @@
 package com.epam.rd.izh.entity;
 
 import com.epam.rd.izh.util.Role;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 import java.util.Objects;
-
 
 public class User {
 
