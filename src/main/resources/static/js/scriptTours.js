@@ -14,3 +14,11 @@ footer.hover(function () {
     $(this).css('box-shadow', 'none');
     $(this).css('background-color', '#fafafa');
 })
+
+$('.btn-danger').click((e) => {
+    let answer = confirm("Are you confirm deleting?");
+
+    if(!answer) {
+        e.preventDefault();
+    }
+})

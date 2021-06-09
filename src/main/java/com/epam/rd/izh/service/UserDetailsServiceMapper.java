@@ -41,7 +41,7 @@ public class UserDetailsServiceMapper implements UserDetailsService {
     if (authorizedUser == null) throw new UsernameNotFoundException("No user with this login");
 
     Set<GrantedAuthority> roles = new HashSet<>();
-    roles.add(new SimpleGrantedAuthority(authorizedUser.getRole().name()));
+    roles.add(new SimpleGrantedAuthority("ROLE_" + authorizedUser.getRole().name()));
 
     return new User(
         authorizedUser.getLogin(),

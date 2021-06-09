@@ -64,4 +64,8 @@ public final class TourService {
     public void save(Tour tour) {
         tourDao.save(tour);
     }
+
+    public Tour findTourByTitle(TourValidDto tourValidDto) {
+        return tourDao.findByTitle(tourValidDto.getTitle());
+    }
 }

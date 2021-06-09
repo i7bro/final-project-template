@@ -43,4 +43,9 @@ public class TourDao {
     public void save(Tour tour) {
         jdbcTemplate.update(INSERT_SQL, tour.getTitle(), tour.getDescription(), tour.getRoute(), tour.getCost(), tour.getNotice());
     }
+
+    public Tour findByTitle(String title) {
+        return jdbcTemplate.query(FIND_BY_TITLE_SQL, new BeanPropertyRowMapper<>(Tour.class), title).stream()
+                .findFirst().orElse(null);
+    }
 }

@@ -29,12 +29,14 @@
                     <div class="form-group col-md-12">
                         <label for="title">Title</label>
                         <input name="title" type="text" class="form-control" id="title" placeholder="Title" required>
+                        <div th:if="${error} != null" th:text="${error}" style="color: red;">
+                            Error!
+                        </div>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="Description">Description</label>
-                    <textarea name="description" class="form-control" id="Description"
-                              placeholder="Description" required></textarea>
+                    <textarea name="description" class="form-control" id="Description" placeholder="Description" required></textarea>
                 </div>
                 <div class="form-group">
                     <label for="route">Route</label>
@@ -42,13 +44,11 @@
                 </div>
                 <div class="form-group">
                     <label for="notice">Notice</label>
-                    <textarea name="notice" class="form-control" id="notice"
-                              placeholder="Notice" required></textarea>
+                    <textarea name="notice" class="form-control" id="notice" placeholder="Notice" required></textarea>
                 </div>
                 <div class="form-group">
                     <label for="cost">Cost</label>
-                    <input name="cost" type="number" class="form-control" id="cost"
-                           placeholder="Cost" required>
+                    <input name="cost" type="number" class="form-control" id="cost" placeholder="Cost" required>
                 </div>
 
                 <button type="submit" class="btn btn-success">Add</button>

@@ -80,14 +80,15 @@ public class AuthenticationController {
                                       BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 
         if (userService.hasSameLogin(registeredUser)) {
-            ObjectError error = new ObjectError("login_already_exists", "Login already exists, please, create new login");
-            bindingResult.addError(error);
+//            ObjectError error = new ObjectError("login_already_exists", "Login already exists, please, create new login");
+//            bindingResult.addError(error);
             redirectAttributes.addAttribute("error", "Login already exists, please, create new login");
-        }
-
-        if (bindingResult.hasErrors()) {
             return "redirect:/registration";
         }
+
+//        if (bindingResult.hasErrors()) {
+//            return "redirect:/registration";
+//        }
         /**
          * Здесь происходит присвоение роли пользователю и шифрование пароля.
          * Роль может быть так же определена пользователем на этапе регистрации, либо иным способов, зависящим

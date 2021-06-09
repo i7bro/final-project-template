@@ -20,58 +20,14 @@
                         User
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink0">
-                        <a class="dropdown-item" href="/settings">Settings</a>
-                        <a class="dropdown-item" href="/user-tours">My tours</a>
+                        <a th:if="${role} == 'ROLE_USER'" class="dropdown-item" href="/settings">Settings</a>
+                        <a th:if="${role} == 'ROLE_USER'" class="dropdown-item" href="/user-tours">My tours</a>
                         <a class="dropdown-item" href="/logout">Logout</a>
                     </div>
                 </li>
             </ul>
         </div>
         <ul class="navbar-nav ml-auto">
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink1" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false">
-                    Ural
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink1">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false">
-                    Kavkaz
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink3" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false">
-                    Kamchatka
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink3">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink4" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false">
-                    Crimea
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink4">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-            </li>
             <li class="nav-item active">
                 <a class="nav-link" href="/tours">All&nbsp;tours<span class="sr-only"></span></a>
             </li>
@@ -87,12 +43,12 @@
 </nav>
 
 
-<button th:if="${role} == 'USER'" th:fragment="modal_btn_user" type="button" class="btn btn-light" data-toggle="modal"
+<button th:if="${role} == 'ROLE_USER'" th:fragment="modal_btn_user" type="button" class="btn btn-light" data-toggle="modal"
         th:data-target="'#modal'+${card.getId()}"
         style="margin: 5px;">
     Detailes
 </button>
-<div th:if="${role} == 'USER'" th:fragment="modal_user" class="modal fade" th:id="'modal'+${card.getId()}"
+<div th:if="${role} == 'ROLE_USER'" th:fragment="modal_user" class="modal fade" th:id="'modal'+${card.getId()}"
      data-backdrop="modal" data-keyboard="true" tabindex="-1"
      aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-lg">
@@ -123,11 +79,11 @@
 </div>
 
 
-<button th:if="${role} == 'ADMIN'" th:fragment="modal_btn_admin" type="button" class="btn btn-light" data-toggle="modal"
+<button th:if="${role} == 'ROLE_ADMIN'" th:fragment="modal_btn_admin" type="button" class="btn btn-light" data-toggle="modal"
         th:data-target="'#modal'+${card.getId()}+'adm'" style="margin: 5px;">
     Edit tour
 </button>
-<div th:if="${role} == 'ADMIN'" th:fragment="modal_admin" class="modal fade" th:id="'modal'+${card.getId()}+'adm'"
+<div th:if="${role} == 'ROLE_ADMIN'" th:fragment="modal_admin" class="modal fade" th:id="'modal'+${card.getId()}+'adm'"
      data-backdrop="modal" data-keyboard="true" tabindex="-1"
      aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-lg">
@@ -163,8 +119,8 @@
                 </div>
             </form>
             <div class="modal-footer">
-                <form th:method="post" th:action="@{/tours/delete/{id}(id=${card.getId()})}" class="mr-auto">
-                    <button type="submit" class="btn btn-danger">Delete tour</button>
+                <form th:method="post" th:action="@{/tours/delete/{id}(id=${card.getId()})}" class="mr-auto" id="deleteForm">
+                    <button type="submit" class="btn btn-danger" id="deleteBtn">Delete tour</button>
                 </form>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button th:form="'tourForm'+${card.getId()}" type="submit" class="btn btn-light">Submit</button>

@@ -23,6 +23,7 @@ public class SettingsController {
         User user = userService.getUserByLogin(authentication.getName());
         model.addAttribute("user", user.getLogin());
         model.addAttribute("userCur", user);
+        model.addAttribute("role", authentication.getAuthorities().toArray()[0].toString());
 
         return "settings";
     }

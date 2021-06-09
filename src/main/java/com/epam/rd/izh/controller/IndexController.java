@@ -1,6 +1,5 @@
 package com.epam.rd.izh.controller;
 
-import com.epam.rd.izh.entity.User;
 import com.epam.rd.izh.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -22,6 +21,7 @@ public class IndexController {
   public String login(Authentication authentication, Model model) {
 
     model.addAttribute("user", authentication.getName());
+    model.addAttribute("role", authentication.getAuthorities().toArray()[0].toString());
     return "main";
   }
 

@@ -35,7 +35,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/registration/**").permitAll()
 //                .antMatchers("/tours/edit_tour").hasRole(Role.ADMIN.name())
 //                .antMatchers("/tours/delete/*").hasRole(Role.ADMIN.name())
-                .antMatchers(HttpMethod.GET, "/new_tour/").hasRole(Role.ADMIN.name())
+                .antMatchers("/new_tour").hasRole(Role.ADMIN.name())
+                .antMatchers("/tours/edit_tour").hasRole(Role.ADMIN.name())
+                .antMatchers("/tours/delete/**").hasRole(Role.ADMIN.name())
 
 
                 .antMatchers("/css/**").permitAll()
@@ -43,6 +45,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/img/**").permitAll()
 
                 .anyRequest().authenticated()
+                .and()
+
+                .httpBasic()
                 .and()
 
                 .formLogin()
@@ -62,10 +67,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .and()
                 .csrf().disable();
-//
-//                /**
-//                 * Включение функции выхода из текущей сессии.
-//                 */
     }
 
     @Override

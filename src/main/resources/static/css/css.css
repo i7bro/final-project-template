@@ -31,10 +31,21 @@ body {
     width: 500px;
 }
 
+@media(max-width: 991px) {
+    .modal-body table input, textarea {
+        width: 300px;
+    }
+}
+
+@media(max-width: 576px) {
+    .modal-body table input, textarea {
+        width: 50vw;
+    }
+}
+
 #footer{
     position: fixed;
     left: 0; bottom: 0;
-    padding: 10px;
     background: #fafafa;
     color: black;
     width: 100%;
