@@ -1,9 +1,5 @@
 package com.epam.rd.izh.entity;
 
-import org.hibernate.validator.constraints.Range;
-
-import javax.validation.constraints.Pattern;
-import java.util.Iterator;
 import java.util.Objects;
 
 public class Tour {
@@ -11,6 +7,7 @@ public class Tour {
     private Integer id;
     private String title;
     private String description;
+    private String direction;
     private Integer route;
     private Integer cost;
     private String notice;
@@ -37,6 +34,11 @@ public class Tour {
 
         public Builder description(String description) {
             tour.description = description;
+            return this;
+        }
+
+        public Builder direction(String direction) {
+            tour.direction = direction;
             return this;
         }
 
@@ -112,17 +114,25 @@ public class Tour {
         this.notice = notice;
     }
 
+    public String getDirection() {
+        return direction;
+    }
+
+    public void setDirection(String direction) {
+        this.direction = direction;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Tour tour = (Tour) o;
-        return Objects.equals(id, tour.id) && Objects.equals(title, tour.title) && Objects.equals(description, tour.description) && Objects.equals(route, tour.route) && Objects.equals(cost, tour.cost) && Objects.equals(notice, tour.notice);
+        return Objects.equals(id, tour.id) && Objects.equals(title, tour.title) && Objects.equals(description, tour.description) && Objects.equals(direction, tour.direction) && Objects.equals(route, tour.route) && Objects.equals(cost, tour.cost) && Objects.equals(notice, tour.notice);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, description, route, cost, notice);
+        return Objects.hash(id, title, description, direction, route, cost, notice);
     }
 
     @Override
@@ -131,6 +141,7 @@ public class Tour {
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
+                ", direction='" + direction + '\'' +
                 ", route=" + route +
                 ", cost=" + cost +
                 ", notice='" + notice + '\'' +

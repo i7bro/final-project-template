@@ -36,23 +36,32 @@
                 </div>
                 <div class="form-group">
                     <label for="Description">Description</label>
-                    <textarea name="description" class="form-control" id="Description" placeholder="Description" required></textarea>
+                    <textarea name="description" class="form-control" id="Description" placeholder="Description"
+                              required></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="route">Route</label>
-                    <input name="route" type="number" class="form-control" id="route" placeholder="Route" required>
+                    <label for="Direction">Direction</label>
+                    <input name="direction" class="form-control" id="Direction" placeholder="Direction" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="route">Route</label>
+                        <input name="route" type="number" class="form-control" id="route" placeholder="Route" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="cost">Cost</label>
+                        <input name="cost" type="number" class="form-control" id="cost" placeholder="Cost" required>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="notice">Notice</label>
                     <textarea name="notice" class="form-control" id="notice" placeholder="Notice" required></textarea>
                 </div>
-                <div class="form-group">
-                    <label for="cost">Cost</label>
-                    <input name="cost" type="number" class="form-control" id="cost" placeholder="Cost" required>
-                </div>
 
                 <button type="submit" class="btn btn-success">Add</button>
-                <a href="/tours"><button type="button" class="btn btn-info">Return</button></a>
+                <a href="/tours">
+                    <button type="button" class="btn btn-info">Return</button>
+                </a>
             </form>
         </div>
         <div class="col-md-4">

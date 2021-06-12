@@ -20,7 +20,7 @@ public class User {
 
     public static class Builder {
 
-        User user = new User();
+        private final User user = new User();
 
         private Builder() {}
 

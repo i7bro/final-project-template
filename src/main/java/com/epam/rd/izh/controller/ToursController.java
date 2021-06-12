@@ -2,6 +2,7 @@ package com.epam.rd.izh.controller;
 
 import com.epam.rd.izh.dto.TourValidDto;
 import com.epam.rd.izh.entity.Tour;
+import com.epam.rd.izh.entity.Trip;
 import com.epam.rd.izh.service.TourService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -14,7 +15,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 
 @Controller
@@ -29,8 +32,16 @@ public class ToursController {
 
     @GetMapping("/tours")
     public String tours(Authentication authentication, Model model,
-                        @RequestParam(required = false) String error, @RequestParam(required = false) String success) {
-        List<List<Tour>> toursGroup = tourService.getAllTourGroups4();
+                        @RequestParam(required = false) String error,
+                        @RequestParam(required = false) String success,
+                        @RequestParam(required = false) String direction) {
+        List<List<Object[]>> toursGroup;
+
+        if (direction != null) {
+            toursGroup = tourService.getAllTourGroups4(direction);
+        } else {
+            toursGroup = tourService.getAllTourGroups4();
+        }
 
         model.addAttribute("success", success);
         model.addAttribute("error", error);

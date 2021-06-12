@@ -85,26 +85,16 @@ public class UserDao {
         );
     }
 
-    public User save(User entity) {
-        KeyHolder id = new GeneratedKeyHolder();
-
-        jdbcTemplate.update(connection -> {
-            PreparedStatement statement = connection.prepareStatement(SAVE_SQL, Statement.RETURN_GENERATED_KEYS);
-
-            statement.setString(1, entity.getLogin());
-            statement.setString(2, entity.getEmail());
-            statement.setString(3, entity.getFirstName());
-            statement.setString(4, entity.getLastName());
-            statement.setString(5, entity.getPassword());
-            statement.setString(6, entity.getPhone());
-            statement.setString(7, entity.getRole().toString());
-
-            return statement;
-        }, id);
-
-        entity.setId(Objects.requireNonNull(id.getKey()).intValue());
-
-        return entity;
+    public void save(User entity) {
+        jdbcTemplate.update(
+                SAVE_SQL,
+                entity.getLogin(),
+                entity.getEmail(),
+                entity.getFirstName(),
+                entity.getLastName(),
+                entity.getPassword(),
+                entity.getPhone(),
+                entity.getRole().toString());
     }
 
 

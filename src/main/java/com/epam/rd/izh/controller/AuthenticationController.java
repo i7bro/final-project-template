@@ -1,10 +1,7 @@
 package com.epam.rd.izh.controller;
 
-import com.epam.rd.izh.dao.UserDao;
-
 import javax.validation.Valid;
 
-import com.epam.rd.izh.dto.UserLoginDto;
 import com.epam.rd.izh.entity.User;
 import com.epam.rd.izh.service.UserService;
 import com.epam.rd.izh.util.Role;
@@ -13,7 +10,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -86,9 +82,6 @@ public class AuthenticationController {
             return "redirect:/registration";
         }
 
-//        if (bindingResult.hasErrors()) {
-//            return "redirect:/registration";
-//        }
         /**
          * Здесь происходит присвоение роли пользователю и шифрование пароля.
          * Роль может быть так же определена пользователем на этапе регистрации, либо иным способов, зависящим

@@ -8,6 +8,7 @@ public class TourValidDto {
     private Integer id;
     private String title;
     private String description;
+    private String direction;
     @Pattern(regexp = "\\d+")
     private String route;
     @Pattern(regexp = "\\d+")
@@ -62,4 +63,11 @@ public class TourValidDto {
         this.notice = notice;
     }
 
+    public String getDirection() {
+        return direction;
+    }
+
+    public void setDirection(String direction) {
+        this.direction = direction;
+    }
 }

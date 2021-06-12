@@ -1,6 +1,8 @@
 package com.epam.rd.izh;
 
+import com.epam.rd.izh.entity.Trip;
 import com.epam.rd.izh.entity.User;
+import com.epam.rd.izh.service.TripService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.parsing.PassThroughSourceExtractor;
 import org.springframework.boot.SpringApplication;

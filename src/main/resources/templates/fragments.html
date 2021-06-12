@@ -43,31 +43,56 @@
 </nav>
 
 
-<button th:if="${role} == 'ROLE_USER'" th:fragment="modal_btn_user" type="button" class="btn btn-light" data-toggle="modal"
-        th:data-target="'#modal'+${card.getId()}"
+<button th:if="${role} == 'ROLE_USER'" th:fragment="modal_btn_user" type="button" class="btn btn-light"
+        data-toggle="modal"
+        th:data-target="'#modal'+${card[0].getId()}"
         style="margin: 5px;">
     Detailes
 </button>
-<div th:if="${role} == 'ROLE_USER'" th:fragment="modal_user" class="modal fade" th:id="'modal'+${card.getId()}"
+<div th:if="${role} == 'ROLE_USER'" th:fragment="modal_user" class="modal fade" th:id="'modal'+${card[0].getId()}"
      data-backdrop="modal" data-keyboard="true" tabindex="-1"
      aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 th:text="${card.getTitle()}" class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                <h5 th:text="${card[0].getTitle()}" class="modal-title" id="staticBackdropLabel">Modal title</h5>
             </div>
             <div class="modal-body">
                 <p>
-                    Description: <span th:text="${card.getDescription()}"></span>;
+                    Description: <span th:text="${card[0].getDescription()}"></span>;
                 </p>
                 <p>
-                    Route: <span th:text="${card.getRoute()}"></span> miles;
+                    Direction: <span th:text="${card[0].getDirection()}"></span>;
                 </p>
                 <p>
-                    Notice: <span th:text="${card.getNotice()}"></span>;
+                    Route: <span th:text="${card[0].getRoute()}"></span> miles;
                 </p>
                 <p>
-                    Price: <span th:text="${card.getCost()}"></span> rubles;
+                    Notice: <span th:text="${card[0].getNotice()}"></span>;
+                </p>
+                <p>
+                    Price: <span th:text="${card[0].getCost()}"></span> rubles;
+                </p>
+                <p>
+                <h3>Trips:</h3>
+                <table border="1" cellpadding="5">
+                    <thead>
+                        <td>Start date and time</td>
+                        <td>Free spots</td>
+                        <td>Instructors</td>
+                    </thead>
+                    <th:block th:each="trip : ${card[1]}">
+                        <tr>
+                            <td th:text="${trip.getArriveDate()}"></td>
+                            <td th:text="${trip.getFreeSpots()}"></td>
+                            <td>
+                                <span th:text="${trip.getInstructors().get('main')}"></span><br>
+                                <span th:text="${trip.getInstructors().get('helper')}"></span>
+                            </td>
+                            <td><span>Button</span></td>
+                        </tr>
+                    </th:block>
+                </table>
                 </p>
             </div>
             <div class="modal-footer">
@@ -79,51 +104,62 @@
 </div>
 
 
-<button th:if="${role} == 'ROLE_ADMIN'" th:fragment="modal_btn_admin" type="button" class="btn btn-light" data-toggle="modal"
-        th:data-target="'#modal'+${card.getId()}+'adm'" style="margin: 5px;">
+<button th:if="${role} == 'ROLE_ADMIN'" th:fragment="modal_btn_admin" type="button" class="btn btn-light"
+        data-toggle="modal"
+        th:data-target="'#modal'+${card[0].getId()}+'adm'" style="margin: 5px;">
     Edit tour
 </button>
-<div th:if="${role} == 'ROLE_ADMIN'" th:fragment="modal_admin" class="modal fade" th:id="'modal'+${card.getId()}+'adm'"
+<div th:if="${role} == 'ROLE_ADMIN'" th:fragment="modal_admin" class="modal fade"
+     th:id="'modal'+${card[0].getId()}+'adm'"
      data-backdrop="modal" data-keyboard="true" tabindex="-1"
      aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-lg">
         <div class="modal-content">
             <form method="post" action="tours/edit_tour" modelAttribute="editTourForm"
-                  th:id="'tourForm'+${card.getId()}">
+                  th:id="'tourForm'+${card[0].getId()}">
                 <div class="modal-header">
                     <div class="modal-title">
-                        <span>Title:</span><input th:value="${card.getTitle()}" name="title" required>
+                        <span>Title:</span><input th:value="${card[0].getTitle()}" name="title" required>
                     </div>
                 </div>
                 <div class="modal-body">
-                    <input th:value="${card.getId()}" name="id" hidden/>
+                    <input th:value="${card[0].getId()}" name="id" hidden/>
                     <table>
                         <tr>
                             <td>Description:</td>
-                            <td><textarea th:text="${card.getDescription()}" name="description" rows="2"
+                            <td><textarea th:text="${card[0].getDescription()}" name="description" rows="2"
+                                          required></textarea></td>
+                        </tr>
+                        <tr>
+                            <td>Direction:</td>
+                            <td><textarea th:text="${card[0].getDirection()}" name="direction" rows="1"
                                           required></textarea></td>
                         </tr>
                         <tr>
                             <td>Route:</td>
-                            <td><input th:value="${card.getRoute()}" name="route" class="inputNumber" type="number" required/></td>
+                            <td><input th:value="${card[0].getRoute()}" name="route" class="inputNumber" type="number"
+                                       required/></td>
                         </tr>
                         <tr>
                             <td>Notice:</td>
-                            <td><textarea th:text="${card.getNotice()}" name="notice" rows="2" required></textarea></td>
+                            <td><textarea th:text="${card[0].getNotice()}" name="notice" rows="2" required></textarea>
+                            </td>
                         </tr>
                         <tr>
                             <td>Price:</td>
-                            <td><input th:value="${card.getCost()}" name="cost" class="inputNumber" type="number" required/></td>
+                            <td><input th:value="${card[0].getCost()}" name="cost" class="inputNumber" type="number"
+                                       required/></td>
                         </tr>
                     </table>
                 </div>
             </form>
             <div class="modal-footer">
-                <form th:method="post" th:action="@{/tours/delete/{id}(id=${card.getId()})}" class="mr-auto" id="deleteForm">
+                <form th:method="post" th:action="@{/tours/delete/{id}(id=${card[0].getId()})}" class="mr-auto"
+                      id="deleteForm">
                     <button type="submit" class="btn btn-danger" id="deleteBtn">Delete tour</button>
                 </form>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button th:form="'tourForm'+${card.getId()}" type="submit" class="btn btn-light">Submit</button>
+                <button th:form="'tourForm'+${card[0].getId()}" type="submit" class="btn btn-light">Submit</button>
             </div>
         </div>
     </div>
