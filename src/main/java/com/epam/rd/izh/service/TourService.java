@@ -9,21 +9,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.NoSuchElementException;
 
 @Service
-public final class TourService {
+public class TourService {
 
     private final TourDao tourDao;
-    private final TripDao tripDao;
+    private final TripServiceI tripService;
 
     @Autowired
-    public TourService(TourDao tourDao, TripDao tripDao) {
+    public TourService(TourDao tourDao, TripServiceI tripService) {
         this.tourDao = tourDao;
-        this.tripDao = tripDao;
+        this.tripService = tripService;
     }
 
     public List<Tour> getAllTours() {
@@ -35,11 +33,11 @@ public final class TourService {
     }
 
     public List<List<Object[]>> getAllTourGroups4() {
-        return getGroups4(tourDao.findAll(), tripDao.findAll());
+        return getGroups4(tourDao.findAll(), tripService.findAll());
     }
 
     public List<List<Object[]>> getAllTourGroups4(String direction) {
-        return getGroups4(tourDao.findAllByDirection(direction), tripDao.findAll());
+        return getGroups4(tourDao.findAllByDirection(direction), tripService.findAll());
     }
 
     private List<List<Object[]>> getGroups4(List<Tour> tours, List<Trip> trips) {
@@ -91,5 +89,9 @@ public final class TourService {
 
     public Tour findTourByTitle(TourValidDto tourValidDto) {
         return tourDao.findByTitle(tourValidDto.getTitle());
+    }
+
+    public Tour findTourById(Integer id) {
+        return tourDao.findToutById(id).orElseThrow(() -> new NoSuchElementException("Tour not found"));
     }
 }

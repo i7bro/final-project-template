@@ -18,8 +18,12 @@ import java.util.Optional;
 @Repository
 public class UserDao {
 
-    @Autowired
     JdbcTemplate jdbcTemplate;
+
+    @Autowired
+    public UserDao(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
 
     private static final String FIND_ALL_SQL =
             "select id, " +
@@ -57,10 +61,6 @@ public class UserDao {
             "select id, login, email, firstName, lastName, password, phone, role from users where login = ?";
     private static final String FIND_BY_LOGIN_PASS_SQL = FIND_BY_LOGIN_SQL + " and password = ?";
 
-    @Autowired
-    public UserDao(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    }
 
     public List<User> findAll() {
         return jdbcTemplate.query(FIND_ALL_SQL, new BeanPropertyRowMapper<>(User.class));

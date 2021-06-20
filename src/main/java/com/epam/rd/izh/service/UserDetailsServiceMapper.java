@@ -37,8 +37,8 @@ public class UserDetailsServiceMapper implements UserDetailsService {
 
   @Override
   public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
-    com.epam.rd.izh.entity.User authorizedUser = userRepository.findByLogin(login).orElse(null);
-    if (authorizedUser == null) throw new UsernameNotFoundException("No user with this login");
+    com.epam.rd.izh.entity.User authorizedUser = userRepository.findByLogin(login)
+            .orElseThrow(() -> new UsernameNotFoundException("No user with this login"));
 
     Set<GrantedAuthority> roles = new HashSet<>();
     roles.add(new SimpleGrantedAuthority("ROLE_" + authorizedUser.getRole().name()));

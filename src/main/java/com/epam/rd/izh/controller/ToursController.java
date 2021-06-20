@@ -9,6 +9,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
@@ -30,8 +31,8 @@ public class ToursController {
         this.tourService = tourService;
     }
 
-    @GetMapping("/tours")
-    public String tours(Authentication authentication, Model model,
+    @GetMapping({"/tours", "/tours/"})
+    public String tours(Authentication authentication, ModelMap model,
                         @RequestParam(required = false) String error,
                         @RequestParam(required = false) String success,
                         @RequestParam(required = false) String direction) {
@@ -50,11 +51,6 @@ public class ToursController {
         model.addAttribute("role", authentication.getAuthorities().toArray()[0].toString());
 
         return "tours";
-    }
-
-    @GetMapping("/tours/")
-    public String toursSlash() {
-        return "redirect:/tours";
     }
 
     @PostMapping("/tours/edit_tour")
@@ -78,7 +74,7 @@ public class ToursController {
         return "redirect:/tours";
     }
 
-    @GetMapping("/new_tour")
+    @GetMapping({"/new_tour", "/new_tour/"})
     public String newTour(Authentication authentication, Model model,
                           @RequestParam(required = false) String error,
                           @RequestParam(required = false) String tour) {
@@ -92,11 +88,6 @@ public class ToursController {
         model.addAttribute("user", authentication.getName());
 
         return "new_tour";
-    }
-
-    @GetMapping("/new_tour/")
-    public String newTourSlash() {
-        return "redirect:/new_tour";
     }
 
     @PostMapping("/new_tour")

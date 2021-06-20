@@ -12,7 +12,7 @@ body {
 }
 
 #btn-img {
-    margin-bottom: 0px;
+    margin-bottom: 0;
 }
 
 .tour-color {
@@ -59,4 +59,12 @@ body {
 
 li {
     list-style-type: none;
+}
+
+li a button {
+    width: 80px;
+}
+
+#checkboxTrip {
+    width: 20px;
 }

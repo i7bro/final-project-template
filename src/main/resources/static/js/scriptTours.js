@@ -16,9 +16,17 @@ footer.hover(function () {
 })
 
 $('.btn-danger').click((e) => {
-    let answer = confirm("Are you confirm deleting?");
+    let answer = confirm("Are you confirm action?");
 
     if(!answer) {
         e.preventDefault();
     }
 })
+
+function hiddenMessage() {
+    $('.alert').attr('hidden', 'hidden');
+}
+
+setTimeout(hiddenMessage, 6000);
+
+

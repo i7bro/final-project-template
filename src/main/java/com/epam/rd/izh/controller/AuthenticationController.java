@@ -36,7 +36,9 @@ public class AuthenticationController {
      * /login - определяет URL, по которому пользователь должен перейти, чтобы запустить данный метод-обработчик.
      */
     @GetMapping("/login")
-    public String login(Model model, @RequestParam(required = false) String error, @RequestParam(required = false) String success) {
+    public String login(Model model,
+                        @RequestParam(required = false) String error,
+                        @RequestParam(required = false) String success) {
         if (error != null) {
             /**
              * Model представляет из себя Map коллекцию ключ-значения, распознаваемую View элементами MVC.
@@ -76,8 +78,6 @@ public class AuthenticationController {
                                       BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 
         if (userService.hasSameLogin(registeredUser)) {
-//            ObjectError error = new ObjectError("login_already_exists", "Login already exists, please, create new login");
-//            bindingResult.addError(error);
             redirectAttributes.addAttribute("error", "Login already exists, please, create new login");
             return "redirect:/registration";
         }

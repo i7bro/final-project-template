@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class TourDao {
@@ -52,5 +53,9 @@ public class TourDao {
 
     public List<Tour> findAllByDirection(String direction) {
         return jdbcTemplate.query(FIND_BY_DIRECTION, new BeanPropertyRowMapper<>(Tour.class), direction);
+    }
+
+    public Optional<Tour> findToutById(Integer id) {
+        return jdbcTemplate.query(FIND_BY_ID_SQL, new BeanPropertyRowMapper<>(Tour.class), id).stream().findFirst();
     }
 }

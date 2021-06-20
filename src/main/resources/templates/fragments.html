@@ -73,13 +73,15 @@
                 <p>
                     Price: <span th:text="${card[0].getCost()}"></span> rubles;
                 </p>
-                <p>
+
                 <h3>Trips:</h3>
+                <form th:id="'tripsForm'+${card[0].getId()}" method="get" action="/user_request">
                 <table border="1" cellpadding="5">
                     <thead>
                         <td>Start date and time</td>
                         <td>Free spots</td>
                         <td>Instructors</td>
+                        <td>Get choice</td>
                     </thead>
                     <th:block th:each="trip : ${card[1]}">
                         <tr>
@@ -89,15 +91,16 @@
                                 <span th:text="${trip.getInstructors().get('main')}"></span><br>
                                 <span th:text="${trip.getInstructors().get('helper')}"></span>
                             </td>
-                            <td><span>Button</span></td>
+                            <td><input id="checkboxTrip" type="checkbox" name="checkbox" th:value="${trip.getId()}"/></td>
                         </tr>
                     </th:block>
                 </table>
-                </p>
+                </form>
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-light">Add to basket</button>
+                <button type="submit" th:form="'tripsForm'+${card[0].getId()}" class="btn btn-light">Sign up to trips</button>
             </div>
         </div>
     </div>
@@ -151,6 +154,9 @@
                                        required/></td>
                         </tr>
                     </table>
+                    <a th:href="'/trips?tourId='+${card[0].getId()}">
+                        <button type="button">Edit trips</button>
+                    </a>
                 </div>
             </form>
             <div class="modal-footer">

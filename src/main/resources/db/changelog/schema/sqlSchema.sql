@@ -15,15 +15,15 @@ CREATE TABLE if not exists users (
 );
 
 CREATE TABLE if not exists tours (
-  id            INT AUTO_INCREMENT,
-  title         VARCHAR(100) NOT NULL,
-  description   VARCHAR(255) NOT NULL,
-  direction     VARCHAR(50) NOT NULL,
-  route         INT NOT NULL,
-  cost          INT NOT NULL,
-  notice        VARCHAR(255) NULL,
-  PRIMARY KEY (id),
-  UNIQUE(title)
+    id            INT AUTO_INCREMENT,
+    title         VARCHAR(100) NOT NULL,
+    description   VARCHAR(255) NOT NULL,
+    direction     VARCHAR(50) NOT NULL,
+    route         INT NOT NULL,
+    cost          INT NOT NULL,
+    notice        VARCHAR(255) NULL,
+    PRIMARY KEY (id),
+    UNIQUE(title)
 );
 
 CREATE TABLE IF NOT EXISTS trips (
@@ -35,6 +35,19 @@ CREATE TABLE IF NOT EXISTS trips (
     PRIMARY KEY(id),
     FOREIGN KEY (tour_id)
         REFERENCES tours(id)
+        ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS usersRequests (
+    id INT AUTO_INCREMENT,
+    user_id INT NOT NULL,
+    trip_id INT NOT NULL,
+    PRIMARY KEY(id),
+    FOREIGN KEY(trip_id)
+        REFERENCES trips(id)
+        ON DELETE CASCADE,
+    FOREIGN KEY(user_id)
+        REFERENCES users(id)
         ON DELETE CASCADE
 );
 
