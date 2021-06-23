@@ -68,3 +68,7 @@ li a button {
 #checkboxTrip {
     width: 20px;
 }
+
+thead {
+    background-color: #fafafa;
+}

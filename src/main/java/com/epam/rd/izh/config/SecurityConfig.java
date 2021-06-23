@@ -33,12 +33,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login").anonymous()
                 .antMatchers("/registration").permitAll()
                 .antMatchers("/registration/**").permitAll()
-//                .antMatchers("/tours/edit_tour").hasRole(Role.ADMIN.name())
-//                .antMatchers("/tours/delete/*").hasRole(Role.ADMIN.name())
                 .antMatchers("/new_tour").hasRole(Role.ADMIN.name())
                 .antMatchers("/tours/edit_tour").hasRole(Role.ADMIN.name())
                 .antMatchers("/tours/delete/**").hasRole(Role.ADMIN.name())
-
+                .antMatchers("/trips").hasAnyRole(Role.ADMIN.name(), Role.MANAGER.name())
 
                 .antMatchers("/css/**").permitAll()
                 .antMatchers("/js/**").permitAll()

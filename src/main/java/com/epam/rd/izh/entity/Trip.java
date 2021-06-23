@@ -1,5 +1,6 @@
 package com.epam.rd.izh.entity;
 
+import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.Objects;
 
@@ -9,7 +10,7 @@ public class Trip {
     private Integer id;
     private Integer tourId;
     private Integer freeSpots;
-    private String arriveDate;
+    private LocalDateTime arriveDate;
     private Map<String, String> instructors;
 
     public Trip() {}
@@ -35,7 +36,7 @@ public class Trip {
             return this;
         }
 
-        public Builder arriveDate(String arriveDate) {
+        public Builder arriveDate(LocalDateTime arriveDate) {
             trip.arriveDate = arriveDate;
             return this;
         }
@@ -78,11 +79,11 @@ public class Trip {
         this.freeSpots = freeSpots;
     }
 
-    public String getArriveDate() {
+    public LocalDateTime getArriveDate() {
         return arriveDate;
     }
 
-    public void setArriveDate(String arriveDate) {
+    public void setArriveDate(LocalDateTime arriveDate) {
         this.arriveDate = arriveDate;
     }
 

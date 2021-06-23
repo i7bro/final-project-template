@@ -35,7 +35,7 @@
             <th:block th:each="trip : ${trips}">
                 <tr>
                     <td th:text="${trip.getTitle()}"></td>
-                    <td th:text="${trip.getArriveDate()}"></td>
+                    <td th:text="${trip.getArriveDate().toLocalDate()} + ' ' + ${trip.getArriveDate().toLocalTime()}"></td>
                     <td th:text="${trip.getFreeSpots()}"></td>
                     <td>
                         <span th:text="${trip.getInstructors().get('main')}"></span><br>
@@ -45,12 +45,64 @@
                     <td th:text="${trip.getDirection()}"></td>
                     <td th:text="${trip.getRoute()}"></td>
                     <td th:text="${trip.getCost()}"></td>
-                    <td th:text="${trip.getTripId()}" hidden="hidden"></td>
-                    <td th:text="${trip.getTourId()}" hidden="hidden"></td>
+                    <td>
+                        <button type="button" data-toggle="modal" th:data-target="'#modal'+${trip.getTripId()}+'adm'" style="margin: 5px;">
+                            Edit trip
+                        </button>
+                        <div class="modal fade" th:id="'modal'+${trip.getTripId()}+'adm'"
+                             data-backdrop="modal" data-keyboard="true" tabindex="-1"
+                             aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg modal-lg">
+                                <div class="modal-content">
+                                    <form method="post" action="/trips/edit" modelAttribute="editTripForm"
+                                          th:id="'tourForm'+${trip.getTripId()}">
+                                        <div class="modal-body">
+                                            <input th:value="${trip.getTripId()}" name="id" hidden/>
+                                            <input th:value="${trip.getTourId()}" name="tourId" hidden/>
+                                            <table>
+                                                <tr>
+                                                    <td>Free spots:</td>
+                                                    <td><input th:value="${trip.getFreeSpots()}" name="freeSpots" type="number" required></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Arrive date:</td>
+                                                    <td><input th:value="${trip.getArriveDate()}" type="datetime-local" name="arriveDate" required></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Main instructor:</td>
+                                                    <td><input th:value="${trip.getInstructors().get('main')}" name="main" required/></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Helper:</td>
+                                                    <td><input th:value="${trip.getInstructors().get('helper')}" name="helper" required>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </form>
+                                    <div class="modal-footer">
+                                        <form th:method="post" th:action="@{/trips/delete/{id}(id=${trip.getTripId()})}" class="mr-auto"
+                                              id="deleteForm">
+                                            <button type="submit" class="btn btn-danger" id="deleteBtn">Delete trip</button>
+                                        </form>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button th:form="'tourForm'+${trip.getTripId()}" type="submit" class="btn btn-light">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
                 </tr>
             </th:block>
         </tbody>
     </table>
+    <a href="/tours"><button class="btn btn-light">Return</button></a>
+
+    <div th:if="${role} == 'ROLE_ADMIN'" id="footer">
+        <a th:href="'/new_trip/'+${tourId}">
+            <div>Add new trip</div>
+        </a>
+    </div>
 </div>
 
 
@@ -65,5 +117,6 @@
         integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
         crossorigin="anonymous"></script>
 <script src="js/jquery.js"></script>
+<script src="js/scriptTrips.js"></script>
 </body>
 </html>

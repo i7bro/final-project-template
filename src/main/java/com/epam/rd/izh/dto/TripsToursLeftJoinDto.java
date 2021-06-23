@@ -9,7 +9,7 @@ public class TripsToursLeftJoinDto {
     private Integer tripId;
     private Integer tourId;
     private String title;
-    private String arriveDate;
+    private LocalDateTime arriveDate;
     private Integer freeSpots;
     private Map<String, String> instructors;
     private String description;
@@ -41,7 +41,7 @@ public class TripsToursLeftJoinDto {
             return this;
         }
 
-        public Builder arriveDate(String arriveDate) {
+        public Builder arriveDate(LocalDateTime arriveDate) {
             joinDto.arriveDate = arriveDate;
             return this;
         }
@@ -109,11 +109,11 @@ public class TripsToursLeftJoinDto {
         this.title = title;
     }
 
-    public String getArriveDate() {
+    public LocalDateTime getArriveDate() {
         return arriveDate;
     }
 
-    public void setArriveDate(String arriveDate) {
+    public void setArriveDate(LocalDateTime arriveDate) {
         this.arriveDate = arriveDate;
     }
 

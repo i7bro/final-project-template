@@ -65,14 +65,14 @@ INSERT INTO tours (title, description, direction, route, cost, notice)
 VALUES ('Crimea dreams', 'walk near sea', 'crimea', 54, 10000, 'none');
 
 INSERT INTO trips (tour_id, free_spots, arrive_date, instructors)
-VALUES (1, 10, '2021-07-01 19:00:00', '{"main":"Semibratov Ilya", "helper":"Semibratova Irina"}');
+VALUES (1, 10, '2021-07-01 19:00', '{"main":"Semibratov Ilya", "helper":"Semibratova Irina"}');
 INSERT INTO trips (tour_id, free_spots, arrive_date, instructors)
-VALUES (1, 10, '2021-07-20 19:00:00', '{"main":"Petrov Petya", "helper":"Ivanov Ivan"}');
+VALUES (1, 10, '2021-07-20 19:00', '{"main":"Petrov Petya", "helper":"Ivanov Ivan"}');
 INSERT INTO trips (tour_id, free_spots, arrive_date, instructors)
-VALUES (1, 13, '2021-09-01 21:00:00', '{"main":"Semibratov Ilya", "helper":"Petrov Petya"}');
+VALUES (1, 13, '2021-09-01 21:00', '{"main":"Semibratov Ilya", "helper":"Petrov Petya"}');
 INSERT INTO trips (tour_id, free_spots, arrive_date, instructors)
-VALUES (2, 15, '2021-07-01 20:00:00', '{"main":"Petrov Petya", "helper":"Semibratova Irina"}');
+VALUES (2, 15, '2021-07-01 20:00', '{"main":"Petrov Petya", "helper":"Semibratova Irina"}');
 INSERT INTO trips (tour_id, free_spots, arrive_date, instructors)
-VALUES (2, 10, '2021-08-01 20:00:00', '{"main":"Petrov Petya", "helper":"Semibratova Irina"}');
+VALUES (2, 10, '2021-08-01 20:00', '{"main":"Petrov Petya", "helper":"Semibratova Irina"}');
 INSERT INTO trips (tour_id, free_spots, arrive_date, instructors)
-VALUES (3, 10, '2021-08-20 10:00:00', '{"main":"Semibratov Ilya", "helper":"Ivanv Ivan"}');
+VALUES (3, 10, '2021-08-20 10:00', '{"main":"Semibratov Ilya", "helper":"Ivanv Ivan"}');

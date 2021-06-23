@@ -2,5 +2,6 @@ package com.epam.rd.izh.util;
 
 public enum Role {
     USER,
-    ADMIN;
+    ADMIN,
+    MANAGER
 }
