@@ -1,4 +1,10 @@
 // ---------login input ------------
+$(document).ready(function(){
+    $('#inputPhone').on("paste",function(e) {
+        e.preventDefault();
+    });
+});
+
 let login = $('#inputLogin'),
     loginJS = document.getElementById('inputLogin'),
     classes = login.attr('class');
@@ -43,7 +49,7 @@ passwordJS2.addEventListener('input', () => {
     let nextElement = $('#inputPassword2 + div');
     let classesCurrent = password2.attr('class');
 
-    if (password2.val() != password1.val()) {
+    if (password2.val() !== password1.val()) {
         if (!classesCurrent.includes('is-innvalid')) {
             password2.attr('class', password2Classes + ' is-innvalid');
             nextElement.remove();
@@ -69,18 +75,16 @@ phoneJS.addEventListener('input', () => {
     let phoneVal = phone.val();
     
     if (currentLengthPhone < phoneVal.length) {
-        if (phoneVal.length == 1 && !['+', '7', '8', '9'].includes(phoneVal)) {
+        if (phoneVal.length === 3 || (phoneVal.length === 1 && !['+', '7', '8', '9'].includes(phoneVal))) {
             phone.val('');
             phoneVal = '';
-        } else if (['7', '+7', '8'].includes(phoneVal)) {
-            phone.val('+7 ');
-        } else if (phoneVal == '9') {
-            phone.val('+7 9')
-        } else if (phoneVal.length == 6) {
+        } else if (['+', '7', '+7', '8', '9'].includes(phoneVal)) {
+            phone.val('+7 9');
+        } else if (phoneVal.length === 6) {
             phone.val(phoneVal + ' ');
-        } else if (phoneVal.length == 10) {
+        } else if (phoneVal.length === 10) {
             phone.val(phoneVal + ' ')
-        } else if (phoneVal.length == 13) {
+        } else if (phoneVal.length === 13) {
             phone.val(phoneVal + ' ')
         }
     }

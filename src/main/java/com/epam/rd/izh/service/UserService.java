@@ -1,34 +1,13 @@
 package com.epam.rd.izh.service;
 
-import com.epam.rd.izh.dao.UserDao;
 import com.epam.rd.izh.entity.User;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
 
-@Service
-public class UserService {
+public interface UserService {
 
-    private final UserDao userDao;
-    private final PasswordEncoder passwordEncoder;
+    User getUserByLogin(String login);
 
-    @Autowired
-    public UserService(UserDao userDao, PasswordEncoder passwordEncoder) {
-        this.userDao = userDao;
-        this.passwordEncoder = passwordEncoder;
-    }
+    void saveUser(User user);
 
-    public User getUserByLogin(String login) {
-        return userDao.findByLogin(login)
-                .orElseThrow(() -> new UsernameNotFoundException("No user with this login"));
-    }
-
-    public void saveUser(User user) {
-        userDao.save(user);
-    }
-
-    public boolean hasSameLogin(User user) {
-        return getUserByLogin(user.getLogin()) != null;
-    }
+    boolean hasSameLogin(User user);
 }

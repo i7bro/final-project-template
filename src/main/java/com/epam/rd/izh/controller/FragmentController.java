@@ -1,20 +1,17 @@
 package com.epam.rd.izh.controller;
 
-import com.epam.rd.izh.entity.User;
-import com.epam.rd.izh.service.UserService;
+import com.epam.rd.izh.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class FragmentController {
 
-    UserService service;
+    UserServiceImpl service;
 
     @Autowired
-    public FragmentController(UserService service) {
+    public FragmentController(UserServiceImpl service) {
         this.service = service;
     }
 

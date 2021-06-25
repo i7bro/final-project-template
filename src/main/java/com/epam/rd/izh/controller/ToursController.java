@@ -1,33 +1,27 @@
 package com.epam.rd.izh.controller;
 
 import com.epam.rd.izh.dto.TourValidDto;
-import com.epam.rd.izh.entity.Tour;
-import com.epam.rd.izh.entity.Trip;
-import com.epam.rd.izh.service.TourService;
+import com.epam.rd.izh.service.impl.TourServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 
 @Controller
 public class ToursController {
 
-    TourService tourService;
+    TourServiceImpl tourService;
 
     @Autowired
-    public ToursController(TourService tourService) {
+    public ToursController(TourServiceImpl tourService) {
         this.tourService = tourService;
     }
 
@@ -57,7 +51,7 @@ public class ToursController {
     public String editTour(@ModelAttribute("editTourForm") @Valid TourValidDto tourValidDto,
                            BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         if (!bindingResult.hasErrors()) {
-            tourService.updateTour(tourService.getTour(tourValidDto));
+            tourService.updateTour(tourService.toTour(tourValidDto));
             redirectAttributes.addAttribute("success", "Data updated success.");
         } else {
             redirectAttributes.addAttribute("error", "Form is not valid!");
@@ -98,7 +92,7 @@ public class ToursController {
                 redirectAttributes.addAttribute("error", "title already exists, please, create new title");
                 return "redirect:/new_tour";
             } else {
-                tourService.save(tourService.getTour(tourValidDto));
+                tourService.save(tourService.toTour(tourValidDto));
                 redirectAttributes.addAttribute("success", "Data updated success.");
 
                 return "redirect:/tours";

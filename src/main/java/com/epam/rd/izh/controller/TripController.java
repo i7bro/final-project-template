@@ -2,8 +2,8 @@ package com.epam.rd.izh.controller;
 
 import com.epam.rd.izh.dto.TripDto;
 import com.epam.rd.izh.dto.TripsToursLeftJoinDto;
-import com.epam.rd.izh.service.TourService;
-import com.epam.rd.izh.service.TripServiceI;
+import com.epam.rd.izh.service.impl.TourServiceImpl;
+import com.epam.rd.izh.service.TripService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -16,11 +16,11 @@ import java.util.NoSuchElementException;
 @Controller
 public class TripController {
 
-    private TripServiceI tripService;
-    private TourService tourService;
+    private TripService tripService;
+    private TourServiceImpl tourService;
 
     @Autowired
-    public TripController(TripServiceI tripService, TourService tourService) {
+    public TripController(TripService tripService, TourServiceImpl tourService) {
         this.tripService = tripService;
         this.tourService = tourService;
     }

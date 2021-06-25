@@ -3,7 +3,7 @@ package com.epam.rd.izh.controller;
 import javax.validation.Valid;
 
 import com.epam.rd.izh.entity.User;
-import com.epam.rd.izh.service.UserService;
+import com.epam.rd.izh.service.impl.UserServiceImpl;
 import com.epam.rd.izh.util.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -26,7 +26,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class AuthenticationController {
 
     @Autowired
-    UserService userService;
+    UserServiceImpl userService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;

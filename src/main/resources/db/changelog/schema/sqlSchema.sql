@@ -42,6 +42,7 @@ CREATE TABLE IF NOT EXISTS usersRequests (
     id INT AUTO_INCREMENT,
     user_id INT NOT NULL,
     trip_id INT NOT NULL,
+    state VARCHAR(50) NOT NULL DEFAULT 'UNCONFIRMED',
     PRIMARY KEY(id),
     FOREIGN KEY(trip_id)
         REFERENCES trips(id)
@@ -56,6 +57,8 @@ INSERT INTO users (login, email, firstName, lastName, password, phone, role)
 VALUES ('1', '1', 'Ilya', 'none', '$2y$12$2FEF0d6h1rySif7BHoGY0el3j0Ekstn7GmEVqzMKmdORp8fezcfpG', '1', 'ADMIN');
 INSERT INTO users (login, email, firstName, lastName, password, phone, role)
 VALUES ('2', '1', 'Ilya', 'none', '$2y$12$2FEF0d6h1rySif7BHoGY0el3j0Ekstn7GmEVqzMKmdORp8fezcfpG', '1', 'USER');
+INSERT INTO users (login, email, firstName, lastName, password, phone, role)
+VALUES ('3', '1', 'Ilya', 'none', '$2y$12$2FEF0d6h1rySif7BHoGY0el3j0Ekstn7GmEVqzMKmdORp8fezcfpG', '1', 'USER');
 
 INSERT INTO tours (title, description, direction, route, cost, notice)
 VALUES ('Around Elbrus', 'some description', 'kavkaz', 35, 15000, 'none');

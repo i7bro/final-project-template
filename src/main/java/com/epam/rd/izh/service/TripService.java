@@ -1,88 +1,27 @@
 package com.epam.rd.izh.service;
 
-import com.epam.rd.izh.dao.TripDao;
 import com.epam.rd.izh.dto.TripDto;
 import com.epam.rd.izh.dto.TripsToursLeftJoinDto;
 import com.epam.rd.izh.entity.Trip;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
-@Service
-public class TripService implements TripServiceI {
+public interface TripService {
 
-    public final TripDao tripDao;
+    List<Trip> findAll();
 
-    @Autowired
-    public TripService(TripDao tripDao) {
-        this.tripDao = tripDao;
-    }
+    List<Trip> findAllByTourId(Integer tourId);
 
-    public List<Trip> findAll() {
-        return tripDao.findAll();
-    }
+    List<TripsToursLeftJoinDto> tripsToursLeftJoin();
 
-    @Override
-    public List<Trip> findAllByTourId(Integer tourId) {
-        return tripDao.findAllByTourId(tourId);
-    }
+    List<TripsToursLeftJoinDto> tripsToursLeftJoinByTourId(Integer tourId);
 
-    @Override
-    public List<TripsToursLeftJoinDto> tripsToursLeftJoin() {
-        return tripDao.tripsToursLeftJoin();
-    }
+    void delete(Integer id);
 
-    @Override
-    public List<TripsToursLeftJoinDto> tripsToursLeftJoinByTourId(Integer tourId) {
-        return tripDao.tripsToursLeftJoinByTourId(tourId);
-    }
+    Optional<Trip> findById(Integer id);
 
-    @Override
-    public void delete(Integer id) {
-        tripDao.delete(id);
-    }
+    void save(TripDto tripDto);
 
-    @Override
-    public Optional<Trip> findById(Integer id) {
-        return tripDao.findById(id);
-    }
-
-    @Override
-    public void save(TripDto tripDto) {
-        Map<String, String> instructors = new HashMap<>();
-        instructors.put("main", tripDto.getMain());
-        instructors.put("helper", tripDto.getHelper());
-
-        Trip trip = Trip.getBuilder()
-                .arriveDate(LocalDateTime.parse(tripDto.getArriveDate()))
-                .freeSpots(tripDto.getFreeSpots())
-                .tourId(tripDto.getTourId())
-                .instructors(instructors)
-                .build();
-
-        tripDao.save(trip);
-    }
-
-    @Override
-    public void update(TripDto tripDto) {
-        Map<String, String> instructors = new HashMap<>();
-        instructors.put("main", tripDto.getMain());
-        instructors.put("helper", tripDto.getHelper());
-
-        Trip trip = Trip.getBuilder()
-                .id(tripDto.getId())
-                .arriveDate(LocalDateTime.parse(tripDto.getArriveDate()))
-                .freeSpots(tripDto.getFreeSpots())
-                .tourId(tripDto.getTourId())
-                .instructors(instructors)
-                .build();
-
-        tripDao.update(trip);
-    }
+    void update(TripDto tripDto);
 }

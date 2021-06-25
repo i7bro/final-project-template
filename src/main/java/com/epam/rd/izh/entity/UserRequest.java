@@ -1,10 +1,13 @@
 package com.epam.rd.izh.entity;
 
+import com.epam.rd.izh.util.State;
+
 public class UserRequest {
 
     Integer id;
     User user;
     Trip trip;
+    State state;
 
     public UserRequest() {}
 
@@ -26,6 +29,11 @@ public class UserRequest {
 
         public Builder trip(Trip trip) {
             userRequest.setTrip(trip);
+            return this;
+        }
+
+        public Builder state(State state) {
+            userRequest.setState(state);
             return this;
         }
 
@@ -62,12 +70,21 @@ public class UserRequest {
         this.trip = trip;
     }
 
+    public State getState() {
+        return state;
+    }
+
+    public void setState(State state) {
+        this.state = state;
+    }
+
     @Override
     public String toString() {
         return "UserRequest{" +
                 "id=" + id +
                 ", user=" + user +
                 ", trip=" + trip +
+                ", state=" + state +
                 '}';
     }
 }
