@@ -116,7 +116,7 @@
         th:data-target="'#modal'+${card[0].getId()}+'adm'" style="margin: 5px;">
     Edit tour
 </button>
-<a th:if="${role} == 'ROLE_ADMIN'" th:href="'/trips?tourId='+${card[0].getId()}" th:fragment="btn_trips" target="_blank">
+<a th:if="${role} == 'ROLE_ADMIN'" th:href="'/trips?tourId='+${card[0].getId()}" th:fragment="btn_trips">
     <button type="button" class="btn btn-light" style="margin: 5px;">
         Edit trips
     </button>
@@ -168,7 +168,7 @@
             <div class="modal-footer">
                 <form th:method="post" th:action="@{/tours/delete/{id}(id=${card[0].getId()})}" class="mr-auto"
                       id="deleteForm">
-                    <button type="submit" class="btn btn-danger" id="deleteBtn">Delete tour</button>
+                    <button type="button" class="btn btn-danger" id="deleteBtn">Delete tour</button>
                 </form>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button th:form="'tourForm'+${card[0].getId()}" type="submit" class="btn btn-light">Submit</button>

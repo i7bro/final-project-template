@@ -2,6 +2,7 @@ package com.epam.rd.izh.controller;
 
 import com.epam.rd.izh.dto.TripDto;
 import com.epam.rd.izh.dto.TripsToursLeftJoinDto;
+import com.epam.rd.izh.service.TourService;
 import com.epam.rd.izh.service.impl.TourServiceImpl;
 import com.epam.rd.izh.service.TripService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +18,10 @@ import java.util.NoSuchElementException;
 public class TripController {
 
     private TripService tripService;
-    private TourServiceImpl tourService;
 
     @Autowired
-    public TripController(TripService tripService, TourServiceImpl tourService) {
+    public TripController(TripService tripService) {
         this.tripService = tripService;
-        this.tourService = tourService;
     }
 
     @GetMapping("/trips")

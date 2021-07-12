@@ -2,6 +2,7 @@ package com.epam.rd.izh.controller;
 
 import com.epam.rd.izh.service.impl.UserRequestServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,9 +38,9 @@ public class UserRequestController {
     }
 
     @PostMapping("/user_request/delete/{id}")
-    public String deleteRequest(@PathVariable Integer id) {
+    public void deleteRequest(@PathVariable Integer id, HttpServletResponse response) {
         service.delete(id);
 
-        return "redirect:/user_purchases";
+        response.setStatus(200);
     }
 }

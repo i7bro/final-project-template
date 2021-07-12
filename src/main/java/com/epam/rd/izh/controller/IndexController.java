@@ -17,7 +17,7 @@ public class IndexController {
     this.userService = userService;
   }
 
-  @GetMapping("/")
+  @GetMapping({"/", "/main"})
   public String login(Authentication authentication, Model model) {
 
     model.addAttribute("user", authentication.getName());

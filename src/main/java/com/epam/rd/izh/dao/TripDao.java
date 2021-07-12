@@ -95,7 +95,7 @@ public class TripDao {
         @SneakyThrows
         @Override
         public Trip mapRow(ResultSet resultSet, int i) throws SQLException {
-            return Trip.getBuilder()
+            return Trip.builder()
                     .id(resultSet.getInt("id"))
                     .tourId(resultSet.getInt("tour_id"))
                     .freeSpots(resultSet.getInt("free_spots"))
@@ -110,7 +110,7 @@ public class TripDao {
         @SneakyThrows
         @Override
         public TripsToursLeftJoinDto mapRow(ResultSet resultSet, int i) throws SQLException {
-            return TripsToursLeftJoinDto.getBuilder()
+            return TripsToursLeftJoinDto.builder()
                     .tripId(resultSet.getInt("tr.id"))
                     .tourId(resultSet.getInt("t.id"))
                     .title(resultSet.getString("title"))

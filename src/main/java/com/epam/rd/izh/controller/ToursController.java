@@ -3,6 +3,7 @@ package com.epam.rd.izh.controller;
 import com.epam.rd.izh.dto.TourValidDto;
 import com.epam.rd.izh.service.impl.TourServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +12,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -61,11 +64,10 @@ public class ToursController {
     }
 
     @PostMapping("/tours/delete/{id}")
-    public String deleteTour(@PathVariable("id") Integer id, RedirectAttributes redirectAttributes) {
+    public void deleteTour(@PathVariable("id") Integer id, HttpServletResponse response) {
         tourService.delete(id);
 
-        redirectAttributes.addAttribute("success", "Data updated success.");
-        return "redirect:/tours";
+        response.setStatus(200);
     }
 
     @GetMapping({"/new_tour", "/new_tour/"})
@@ -101,5 +103,11 @@ public class ToursController {
 
         redirectAttributes.addAttribute("error", "Form is not valid!");
         return "redirect:/new_tour";
+    }
+
+    @GetMapping("/temp")
+    public void temp(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime time) {
+
+        System.out.println(time);
     }
 }

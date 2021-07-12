@@ -83,7 +83,7 @@
                                     <div class="modal-footer">
                                         <form th:method="post" th:action="@{/trips/delete/{id}(id=${trip.getTripId()})}" class="mr-auto"
                                               id="deleteForm">
-                                            <button type="submit" class="btn btn-danger" id="deleteBtn">Delete trip</button>
+                                            <button type="button" class="btn btn-danger" id="deleteBtn">Delete trip</button>
                                         </form>
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                         <button th:form="'tourForm'+${trip.getTripId()}" type="submit" class="btn btn-light">Submit</button>

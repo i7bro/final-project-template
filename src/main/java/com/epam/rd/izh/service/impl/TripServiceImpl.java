@@ -59,7 +59,7 @@ public class TripServiceImpl implements TripService {
         instructors.put("main", tripDto.getMain());
         instructors.put("helper", tripDto.getHelper());
 
-        Trip trip = Trip.getBuilder()
+        Trip trip = Trip.builder()
                 .arriveDate(LocalDateTime.parse(tripDto.getArriveDate()))
                 .freeSpots(tripDto.getFreeSpots())
                 .tourId(tripDto.getTourId())
@@ -75,7 +75,7 @@ public class TripServiceImpl implements TripService {
         instructors.put("main", tripDto.getMain());
         instructors.put("helper", tripDto.getHelper());
 
-        Trip trip = Trip.getBuilder()
+        Trip trip = Trip.builder()
                 .id(tripDto.getId())
                 .arriveDate(LocalDateTime.parse(tripDto.getArriveDate()))
                 .freeSpots(tripDto.getFreeSpots())

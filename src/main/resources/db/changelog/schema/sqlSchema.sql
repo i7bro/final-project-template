@@ -5,8 +5,8 @@ CREATE TABLE if not exists users (
     id          int AUTO_INCREMENT,
     login       varchar(50) not null,
     email       varchar(50) not null,
-    firstName   varchar(100) not null,
-    lastName    varchar(100) not null,
+    first_name   varchar(100) not null,
+    last_name    varchar(100) not null,
     password    varchar(255) not null,
     phone       varchar(25) not null,
     role        varchar(10) not null,
@@ -53,11 +53,11 @@ CREATE TABLE IF NOT EXISTS usersRequests (
 );
 
 --changeset semibratov_ilya:2
-INSERT INTO users (login, email, firstName, lastName, password, phone, role)
+INSERT INTO users (login, email, first_name, last_name, password, phone, role)
 VALUES ('1', '1', 'Ilya', 'none', '$2y$12$2FEF0d6h1rySif7BHoGY0el3j0Ekstn7GmEVqzMKmdORp8fezcfpG', '1', 'ADMIN');
-INSERT INTO users (login, email, firstName, lastName, password, phone, role)
+INSERT INTO users (login, email, first_name, last_name, password, phone, role)
 VALUES ('2', '1', 'Ilya', 'none', '$2y$12$2FEF0d6h1rySif7BHoGY0el3j0Ekstn7GmEVqzMKmdORp8fezcfpG', '1', 'USER');
-INSERT INTO users (login, email, firstName, lastName, password, phone, role)
+INSERT INTO users (login, email, first_name, last_name, password, phone, role)
 VALUES ('3', '1', 'Ilya', 'none', '$2y$12$2FEF0d6h1rySif7BHoGY0el3j0Ekstn7GmEVqzMKmdORp8fezcfpG', '1', 'USER');
 
 INSERT INTO tours (title, description, direction, route, cost, notice)
@@ -66,6 +66,10 @@ INSERT INTO tours (title, description, direction, route, cost, notice)
 VALUES ('Mountain Iremel', 'ural', 'ural', 40, 7000, 'none');
 INSERT INTO tours (title, description, direction, route, cost, notice)
 VALUES ('Crimea dreams', 'walk near sea', 'crimea', 54, 10000, 'none');
+INSERT INTO tours (title, description, direction, route, cost, notice)
+VALUES ('test', 'test', 'test', 54, 10000, 'test');
+INSERT INTO tours (title, description, direction, route, cost, notice)
+VALUES ('test1', 'test1', 'test1', 54, 10000, 'test1');
 
 INSERT INTO trips (tour_id, free_spots, arrive_date, instructors)
 VALUES (1, 10, '2021-07-01 19:00', '{"main":"Semibratov Ilya", "helper":"Semibratova Irina"}');

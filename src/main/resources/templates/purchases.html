@@ -22,40 +22,43 @@
 <div class="container">
     <table cellpadding="10">
         <thead>
-            <td>Title</td>
-            <td>Arrive date</td>
-            <td>Description</td>
-            <td>Direction</td>
-            <td>Route</td>
-            <td>Cost</td>
-            <td>State</td>
+        <td>Title</td>
+        <td>Arrive date</td>
+        <td>Description</td>
+        <td>Direction</td>
+        <td>Route</td>
+        <td>Cost</td>
+        <td>State</td>
         </thead>
         <tbody>
-            <th:block th:each="purchase : ${purchases}">
-                <tr>
-                    <td th:text="${purchase.getTitle()}"></td>
-                    <td th:text="${purchase.getArriveDate()}"></td>
-                    <td th:text="${purchase.getDescription()}"></td>
-                    <td th:text="${purchase.getDirection()}"></td>
-                    <td th:text="${purchase.getRoute()}"></td>
-                    <td th:text="${purchase.getCost()}"></td>
-                    <td th:text="${purchase.getState().name()}"></td>
-                    <td th:if="${purchase.getState().name()} == 'UNCONFIRMED'">
-                        <form th:id="'form'+${purchase.getUserRequest()}" th:action="'/user_request/delete/'+${purchase.getUserRequest()}" method="post"></form>
-                        <button type="submit" th:form="'form'+${purchase.getUserRequest()}" class="btn btn-light">Cancel</button>
-                    </td>
-                </tr>
-            </th:block>
+        <th:block th:each="purchase : ${purchases}">
+            <tr>
+                <td th:text="${purchase.getTitle()}"></td>
+                <td th:text="${purchase.getArriveDate()}"></td>
+                <td th:text="${purchase.getDescription()}"></td>
+                <td th:text="${purchase.getDirection()}"></td>
+                <td th:text="${purchase.getRoute()}"></td>
+                <td th:text="${purchase.getCost()}"></td>
+                <td th:text="${purchase.getState().name()}"></td>
+                <td th:if="${purchase.getState().name()} == 'UNCONFIRMED'">
+                    <form th:id="'form'+${purchase.getUserRequest()}"
+                              th:action="'/user_request/delete/'+${purchase.getUserRequest()}" method="post"></form>
+                    <button type="button" th:form="'form'+${purchase.getUserRequest()}" class="btn btn-light">Cancel
+                    </button>
+                </td>
+            </tr>
+        </th:block>
         </tbody>
     </table>
     <p th:if="${purchases.size()} == 0">No purchases</p>
-    <a href="/tours"><button class="btn btn-info">All tours</button></a>
+    <a href="/tours">
+        <button class="btn btn-info">All tours</button>
+    </a>
 
     <footer style="position: fixed; bottom: 0; text-align: center;">
         <p>If you want to cancel a purchase, and state of purchase is not "UNCONFIRMED" call us, please.</p>
     </footer>
 </div>
-
 
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -69,13 +72,21 @@
         crossorigin="anonymous"></script>
 <script src="js/jquery.js"></script>
 <script>
-    $('#deleteBtn').click((e) => {
+    $('td button').click(function() {
         let answer = confirm("Are you confirm action?");
 
-        if(!answer) {
-            e.preventDefault();
+        if (answer) {
+            $(this).attr('hidden', 'hidden')
+            $(this).parent().parent().css('text-decoration', 'line-through');
+
+            $.ajax({
+                url: $(this).prev().attr('action'),
+                method: 'POST',
+                type: 'POST'
+            })
         }
     })
+
 </script>
 </body>
 </html>

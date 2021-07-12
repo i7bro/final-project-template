@@ -22,44 +22,6 @@ lNameJS.addEventListener('input', () => {
     isValid(lName, lNameClasses, 1);
 })
 
-
-// let passwordJS1 = document.getElementById('inputPassword1');
-// let passwordJS2 = document.getElementById('inputPassword2');
-// let password1 = $('#inputPassword1');
-// let password2 = $('#inputPassword2');
-// let password1Classes = password1.attr('class');
-// let password2Classes = password2.attr('class');
-
-// passwordJS1.addEventListener('input', () => {
-//     isValid(password1, password1Classes, 8);
-//     if (password1.val().length < 8) {
-//         password2.attr('disabled', 'disabled');
-//     } else {
-//         password2.removeAttr('disabled');
-//     }
-// })
-
-// passwordJS2.addEventListener('input', () => {
-//     let nextElement = $('#inputPassword2 + div');
-//     let classesCurrent = password2.attr('class');
-
-//     if (password2.val() != password1.val()) {
-//         if (!classesCurrent.includes('is-invalid')) {
-//             password2.attr('class', password2Classes + ' is-invalid');
-//             nextElement.remove();
-//             password2.after('<div class="invalid-feedback">Passwords is not same</div>');
-
-//         }
-//     } else {
-//         if (!classesCurrent.includes('is-valid')) {
-//             password2.attr('class', password2Classes + ' is-valid');
-//             nextElement.remove();
-
-//         }
-//     }
-// })
-
-
 let phoneJS = document.getElementById('inputPhone');
 let phone = $('#inputPhone');
 let phoneClasses = phone.attr('class');
@@ -93,11 +55,16 @@ phoneJS.addEventListener('input', () => {
     currentLengthPhone = phoneVal.length;
 })
 
+function hiddenMessage() {
+    $('.pop-up').attr('hidden', 'hidden');
+}
 
+setTimeout(hiddenMessage, 6000);
 
 
 let email = $('#inputEmail');
 let emailClasses = email.attr('class');
+let infoRedirect = $('#infoRedirect');
 
 email.blur(() => {
     let nextElement = $('#inputEmail + div');
@@ -119,37 +86,7 @@ email.blur(() => {
     }
 })
 
-
 let button = $('#submitBtn');
-let buttonCl = button.attr('class');
-
-button.click((e) => {
-
-    let loginCl = login.attr('class');
-    let emailCl = email.attr('class');
-    let fNameCl = fName.attr('class');
-    let lNameCl = lName.attr('class');
-    // let pass1Cl = password1.attr('class');
-    // let pass2Cl = password2.attr('class');
-    let phoneCl = phone.attr('class');
-
-    let classCurrent = button.attr('class');
-
-    if (!isIncludeValid(loginCl) ||
-        !isIncludeValid(emailCl) ||
-        !isIncludeValid(fNameCl) ||
-        !isIncludeValid(lNameCl) ||
-        // !isIncludeValid(pass1Cl) ||
-        // !isIncludeValid(pass2Cl) ||
-        !isIncludeValid(phoneCl)) {
-
-        e.preventDefault();
-        if (!classCurrent.includes('is-invalid')) {
-            button.attr('class', buttonCl + ' is-invalid');
-            button.after('<div style="color: red; font-sixe: 5px; margin-top: 4px;">Please check form</div>');
-        }
-    }
-})
 
 let dataBtn = $('#dataBtn');
 
@@ -159,6 +96,8 @@ dataBtn.click(() => {
     fName.removeAttr('disabled');
     lName.removeAttr('disabled');
     phone.removeAttr('disabled');
+    infoRedirect.removeAttr('hidden');
+    button.removeAttr('disabled');
 })
 
 
@@ -195,7 +134,7 @@ function isClassesInclude(array) {
         }
     });
 
-    return i == array.length;
+    return i === array.length;
 }
 
 function isIncludeValid(element) {

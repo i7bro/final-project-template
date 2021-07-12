@@ -1,9 +1,24 @@
 package com.epam.rd.izh.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Objects;
 
+@Data
+@Entity
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "tours")
 public class Tour {
 
+    @Id
     private Integer id;
     private String title;
     private String description;
@@ -11,140 +26,4 @@ public class Tour {
     private Integer route;
     private Integer cost;
     private String notice;
-
-    public Tour() {}
-
-    public static class Builder {
-
-        Tour tour;
-
-        public Builder() {
-            tour = new Tour();
-        }
-
-        public Builder title(String title) {
-            tour.title = title;
-            return this;
-        }
-
-        public Builder id(Integer id) {
-            tour.id = id;
-            return this;
-        }
-
-        public Builder description(String description) {
-            tour.description = description;
-            return this;
-        }
-
-        public Builder direction(String direction) {
-            tour.direction = direction;
-            return this;
-        }
-
-        public Builder route(Integer route) {
-            tour.route = route;
-            return this;
-        }
-
-        public Builder cost(Integer cost) {
-            tour.cost = cost;
-            return this;
-        }
-
-        public Builder notice(String notice) {
-            tour.notice = notice;
-            return this;
-        }
-
-        public Tour build() {
-            return tour;
-        }
-    }
-
-    public static Builder builder() {
-        return new Builder();
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public Integer getRoute() {
-        return route;
-    }
-
-    public Integer getCost() {
-        return cost;
-    }
-
-    public String getNotice() {
-        return notice;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setRoute(Integer route) {
-        this.route = route;
-    }
-
-    public void setCost(Integer cost) {
-        this.cost = cost;
-    }
-
-    public void setNotice(String notice) {
-        this.notice = notice;
-    }
-
-    public String getDirection() {
-        return direction;
-    }
-
-    public void setDirection(String direction) {
-        this.direction = direction;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Tour tour = (Tour) o;
-        return Objects.equals(id, tour.id) && Objects.equals(title, tour.title) && Objects.equals(description, tour.description) && Objects.equals(direction, tour.direction) && Objects.equals(route, tour.route) && Objects.equals(cost, tour.cost) && Objects.equals(notice, tour.notice);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, title, description, direction, route, cost, notice);
-    }
-
-    @Override
-    public String toString() {
-        return "Tour{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                ", direction='" + direction + '\'' +
-                ", route=" + route +
-                ", cost=" + cost +
-                ", notice='" + notice + '\'' +
-                '}';
-    }
 }

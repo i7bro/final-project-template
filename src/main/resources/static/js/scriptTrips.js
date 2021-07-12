@@ -1,9 +1,19 @@
 
-$('.btn-danger').click((e) => {
+$('.btn-danger').click(function(e) {
     let answer = confirm("Are you confirm action?");
 
     if(!answer) {
         e.preventDefault();
+    } else {
+        $.ajax({
+            url: $(this).parent().attr('action'),
+            method: 'POST',
+            type: 'POST'
+        })
+        let modal = $(this).parents().eq(5);
+        modal.parent().css('text-decoration', 'line-through')
+        modal.remove();
+        $('.modal-backdrop').remove();
     }
 })
 

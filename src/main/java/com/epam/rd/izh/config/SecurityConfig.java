@@ -1,16 +1,13 @@
 package com.epam.rd.izh.config;
 
-import com.epam.rd.izh.entity.User;
 import com.epam.rd.izh.service.UserDetailsServiceMapper;
 import com.epam.rd.izh.util.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -37,6 +34,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/tours/edit_tour").hasRole(Role.ADMIN.name())
                 .antMatchers("/tours/delete/**").hasRole(Role.ADMIN.name())
                 .antMatchers("/trips").hasAnyRole(Role.ADMIN.name(), Role.MANAGER.name())
+                .antMatchers("/trips/**").hasAnyRole(Role.ADMIN.name())
+                .antMatchers("/new_trip").hasAnyRole(Role.ADMIN.name())
+                .antMatchers("/new_trip/**").hasAnyRole(Role.ADMIN.name())
+                .antMatchers("/trips/edit").hasAnyRole(Role.ADMIN.name())
+                .antMatchers("/trips/delete/**").hasAnyRole(Role.ADMIN.name())
 
                 .antMatchers("/css/**").permitAll()
                 .antMatchers("/js/**").permitAll()

@@ -29,8 +29,8 @@ public class UserDao {
             "select id, " +
                     "login, " +
                     "email, " +
-                    "firstName, " +
-                    "lastName, " +
+                    "first_name, " +
+                    "last_name, " +
                     "password, " +
                     "phone, " +
                     "role " +
@@ -40,8 +40,8 @@ public class UserDao {
             "update users set " +
                     "login = ?, " +
                     "email = ?, " +
-                    "fistName = ?, " +
-                    "lastName = ?, " +
+                    "fist_name = ?, " +
+                    "last_name = ?, " +
                     "password = ?, " +
                     "phone = ?, " +
                     "role = ? " +
@@ -50,15 +50,15 @@ public class UserDao {
             "insert into users (" +
                     "login, " +
                     "email, " +
-                    "firstName, " +
-                    "lastName, " +
+                    "first_name, " +
+                    "last_name, " +
                     "password, " +
                     "phone, " +
                     "role) " +
                     "values (?, ?, ?, ?, ?, ?, ?)";
     private static final String DELETE_SQL = "delete from users where id = ?";
     private static final String FIND_BY_LOGIN_SQL =
-            "select id, login, email, firstName, lastName, password, phone, role from users where login = ?";
+            "select id, login, email, first_name, last_name, password, phone, role from users where login = ?";
     private static final String FIND_BY_LOGIN_PASS_SQL = FIND_BY_LOGIN_SQL + " and password = ?";
 
 

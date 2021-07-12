@@ -7,6 +7,10 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
+import java.io.File;
+import java.util.Hashtable;
+import java.util.concurrent.atomic.AtomicLong;
+
 /**
  * <p>Класс с main методом.
  * <p>Аннотация @SpringBootApplication является мета-аннотацией, т.е. по сути, является алиасом для нескольких аннотаций:

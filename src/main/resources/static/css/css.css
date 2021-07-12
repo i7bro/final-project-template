@@ -72,3 +72,31 @@ li a button {
 thead {
     background-color: #fafafa;
 }
+
+.row {
+    margin-bottom: 2vh;
+}
+
+.pop-up {
+    height: 7vh;
+    background-color: #ffdc99;
+    border-radius: 5px;
+    text-align: center;
+    line-height: 3em;
+    position: absolute;
+    top: 50px;
+    left: 0;
+    width: 100%;
+}
+
+.pop-up-error {
+    height: 7vh;
+    background-color: red;
+    border-radius: 5px;
+    text-align: center;
+    line-height: 3em;
+    position: absolute;
+    top: 50px;
+    left: 0;
+    width: 100%;
+}
