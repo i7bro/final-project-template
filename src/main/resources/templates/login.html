@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" th:href="@{/css/css.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css}"
+          crossorigin="anonymous"/>
+    <title>Login</title>
+</head>
+<body>
+<div th:replace="fragments :: nav_empty"></div>
+
+<div class="container">
+    <div class="col-md-3"></div>
+    <div class="col-md-6" style="margin-top: 20vh; margin-right: auto; margin-left: auto">
+        <h5 th:text="${success}"></h5><br>
+            <form action="login/process" method="post" modelAttribute="loginForm">
+            <div class="form-group">
+                <label for="inputLogin">Login</label>
+                <input name="login" type="text" class="form-control" id="inputLogin" placeholder="Enter login"
+                       checked>
+            </div>
+            <div class="form-group">
+                <label for="inputPassword">Password</label>
+                <input name="password" type="password" class="form-control" id="inputPassword"
+                       placeholder="Enter password" checked>
+                <div style="color: red" th:text="${error_login_placeholder}"></div>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary" id="loginPassSubmit">Log in</button>
+                <a href="/registration">
+                    <button type="button" class="btn btn-outline-success" id="registrationBtn">
+                        Registration
+                    </button>
+                </a>
+            </div>
+        </form>
+    </div>
+    <div class="col-md- 3"></div>
+</div>
+
+<script src="/js/jquery.js"></script>
+<script src="/js/scriptLogin.js"></script>
+</body>
+</html>

@@ -29,6 +29,7 @@ public class Trip {
     private Integer tourId;
     private Integer freeSpots;
     private LocalDateTime arriveDate;
+
     @Type(type = "json")
     @Column(columnDefinition = "json")
     private Map<String, String> instructors;

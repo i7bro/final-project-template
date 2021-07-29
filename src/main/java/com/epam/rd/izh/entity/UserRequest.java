@@ -19,11 +19,14 @@ public class UserRequest {
 
     @Id
     Integer id;
+
     @OneToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     User user;
+
     @OneToOne
     @JoinColumn(name = "trip_id", referencedColumnName = "id")
     Trip trip;
+
     State state;
 }

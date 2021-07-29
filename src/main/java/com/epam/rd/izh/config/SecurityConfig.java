@@ -2,6 +2,7 @@ package com.epam.rd.izh.config;
 
 import com.epam.rd.izh.service.UserDetailsServiceMapper;
 import com.epam.rd.izh.util.Role;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,14 +16,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    private UserDetailsServiceMapper userDetailsService;
+    private final UserDetailsServiceMapper userDetailsService;
 
-    /**
-     * configure методы определяют настройку Spring Security.
-     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -33,7 +31,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/new_tour").hasRole(Role.ADMIN.name())
                 .antMatchers("/tours/edit_tour").hasRole(Role.ADMIN.name())
                 .antMatchers("/tours/delete/**").hasRole(Role.ADMIN.name())
-                .antMatchers("/trips").hasAnyRole(Role.ADMIN.name(), Role.MANAGER.name())
+                .antMatchers("/trips").hasAnyRole(Role.ADMIN.name())
                 .antMatchers("/trips/**").hasAnyRole(Role.ADMIN.name())
                 .antMatchers("/new_trip").hasAnyRole(Role.ADMIN.name())
                 .antMatchers("/new_trip/**").hasAnyRole(Role.ADMIN.name())
@@ -74,12 +72,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         authentication.authenticationProvider(authProvider());
     }
 
-    /**
-     * Класс, обеспечивающий механизм авторизации. Принимает в себя реализацию сервиса авторизации UserDetailsService
-     * и механизм шифрования пароля (реализацию PasswordEncoder).
-     * Итоговый бин DaoAuthenticationProvider добавляется в контекст приложения и обеспечивает основную
-     * логику Spring Security.
-     */
     @Bean
     public DaoAuthenticationProvider authProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
@@ -88,10 +80,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return authProvider;
     }
 
-    /**
-     * Механизм шифрования пароля, реализующий интерфейс PasswordEncoder. В данном примере использован
-     * BCryptPasswordEncoder, можно написать свою реализацию, создав собственный класс шифрования.
-     */
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
