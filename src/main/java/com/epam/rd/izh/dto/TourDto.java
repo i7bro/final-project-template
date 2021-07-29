@@ -1,5 +1,6 @@
 package com.epam.rd.izh.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -8,15 +9,14 @@ import java.lang.reflect.ParameterizedType;
 
 @Data
 @NoArgsConstructor
-public class TourValidDto {
+@AllArgsConstructor
+public class TourDto {
 
     private Integer id;
     private String title;
     private String description;
     private String direction;
-    @Pattern(regexp = "\\d+")
-    private String route;
-    @Pattern(regexp = "\\d+")
-    private String cost;
+    private Integer route;
+    private Integer cost;
     private String notice;
 }

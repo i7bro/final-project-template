@@ -1,33 +1,29 @@
 package com.epam.rd.izh.service.impl;
 
 import com.epam.rd.izh.dao.UserDao;
-import com.epam.rd.izh.dao.UserRepository;
+import com.epam.rd.izh.dao.impl.UserDaoImpl;
 import com.epam.rd.izh.dto.UserPasswordDto;
 import com.epam.rd.izh.dto.UserSettingsDto;
 import com.epam.rd.izh.entity.User;
 import com.epam.rd.izh.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.nio.charset.StandardCharsets;
-import java.util.Base64;
+import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
     private final UserDao userDao;
     private final PasswordEncoder passwordEncoder;
-    private final UserRepository userRepository;
 
-    @Autowired
-    public UserServiceImpl(UserDao userDao, PasswordEncoder passwordEncoder, UserRepository userRepository) {
-        this.userDao = userDao;
-        this.passwordEncoder = passwordEncoder;
-        this.userRepository = userRepository;
+    @Override
+    public List<User> getAll() {
+        return userDao.findAll();
     }
 
     @Override
@@ -37,15 +33,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    //repo
     public void saveUser(User user) {
-        userRepository.save(user);
+        userDao.save(user);
     }
 
     @Override
-    //repo
     public void saveUser(UserSettingsDto userDto) {
-        User user = userRepository.findById(userDto.getId()).orElseThrow(NoSuchElementException::new);
+        User user = userDao.findById(userDto.getId()).orElseThrow(NoSuchElementException::new);
 
         User newUser = User.builder()
                 .id(userDto.getId())
@@ -58,34 +52,45 @@ public class UserServiceImpl implements UserService {
                 .role(user.getRole())
                 .build();
 
-        userRepository.save(newUser);
+        userDao.update(newUser);
     }
 
     @Override
-    //repo
     public void saveUser(UserPasswordDto userPasswordDto) {
         User userById = getUserById(userPasswordDto.getId());
 
         userById.setPassword(passwordEncoder.encode(userPasswordDto.getNewPass()));
-        saveUser(userById);
+        userDao.update(userById);
     }
 
     @Override
-    public boolean hasSameLogin(User user) {
-        return getUserByLogin(user.getLogin()) != null;
+    public boolean hasSameLogin(String login) {
+        return userDao.findByLogin(login).isPresent();
     }
 
     @Override
-    //repo
     public User getUserById(Integer id) {
-        return userRepository.findById(id).orElseThrow(NoSuchElementException::new);
+        return userDao.findById(id).orElseThrow(NoSuchElementException::new);
     }
 
     @Override
-    //repo
     public boolean checkPassword(UserPasswordDto userPasswordDto) {
         User userById = getUserById(userPasswordDto.getId());
 
         return passwordEncoder.matches(userPasswordDto.getOldPass(), userById.getPassword());
+    }
+
+    @Override
+    public UserPasswordDto getUserPasswordDto(Integer id) {
+        return UserPasswordDto.builder()
+                .id(id)
+                .build();
+    }
+
+    @Override
+    public UserPasswordDto getUserPasswordDto(String login) {
+        User userByLogin = getUserByLogin(login);
+
+        return getUserPasswordDto(userByLogin.getId());
     }
 }

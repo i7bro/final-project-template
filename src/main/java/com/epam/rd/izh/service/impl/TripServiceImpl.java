@@ -1,10 +1,12 @@
 package com.epam.rd.izh.service.impl;
 
 import com.epam.rd.izh.dao.TripDao;
+import com.epam.rd.izh.dao.impl.TripDaoImpl;
 import com.epam.rd.izh.dto.TripDto;
 import com.epam.rd.izh.dto.TripsToursLeftJoinDto;
 import com.epam.rd.izh.entity.Trip;
 import com.epam.rd.izh.service.TripService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,14 +17,10 @@ import java.util.Map;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class TripServiceImpl implements TripService {
 
-    public final TripDao tripDao;
-
-    @Autowired
-    public TripServiceImpl(TripDao tripDao) {
-        this.tripDao = tripDao;
-    }
+    private final TripDao tripDao;
 
     public List<Trip> findAll() {
         return tripDao.findAll();

@@ -1,12 +1,12 @@
 package com.epam.rd.izh.service.impl;
 
 import com.epam.rd.izh.dao.TourDao;
-import com.epam.rd.izh.dto.TourValidDto;
+import com.epam.rd.izh.dto.TourDto;
 import com.epam.rd.izh.entity.Tour;
 import com.epam.rd.izh.entity.Trip;
 import com.epam.rd.izh.service.TourService;
 import com.epam.rd.izh.service.TripService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -14,16 +14,12 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
+@RequiredArgsConstructor
 public class TourServiceImpl implements TourService {
 
     private final TourDao tourDao;
     private final TripService tripService;
 
-    @Autowired
-    public TourServiceImpl(TourDao tourDao, TripService tripService) {
-        this.tourDao = tourDao;
-        this.tripService = tripService;
-    }
 
     @Override
     public List<Tour> getAllTours() {
@@ -73,15 +69,15 @@ public class TourServiceImpl implements TourService {
     }
 
     @Override
-    public Tour toTour(TourValidDto tourValidDto) {
+    public Tour mapToTour(TourDto tourDto) {
         return Tour.builder()
-                .id(tourValidDto.getId())
-                .title(tourValidDto.getTitle())
-                .description(tourValidDto.getDescription())
-                .direction(tourValidDto.getDirection())
-                .route(Integer.parseInt(tourValidDto.getRoute()))
-                .cost(Integer.parseInt(tourValidDto.getCost()))
-                .notice(tourValidDto.getNotice())
+                .id(tourDto.getId())
+                .title(tourDto.getTitle())
+                .description(tourDto.getDescription())
+                .direction(tourDto.getDirection())
+                .route(tourDto.getRoute())
+                .cost(tourDto.getCost())
+                .notice(tourDto.getNotice())
                 .build();
     }
 
@@ -96,8 +92,8 @@ public class TourServiceImpl implements TourService {
     }
 
     @Override
-    public Tour findTourByTitle(TourValidDto tourValidDto) {
-        return tourDao.findByTitle(tourValidDto.getTitle());
+    public Tour findTourByTitle(String title) {
+        return tourDao.findByTitle(title).get();
     }
 
     @Override

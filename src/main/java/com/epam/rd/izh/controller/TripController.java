@@ -5,6 +5,7 @@ import com.epam.rd.izh.dto.TripsToursLeftJoinDto;
 import com.epam.rd.izh.service.TourService;
 import com.epam.rd.izh.service.impl.TourServiceImpl;
 import com.epam.rd.izh.service.TripService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -15,14 +16,10 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 @Controller
+@RequiredArgsConstructor
 public class TripController {
 
-    private TripService tripService;
-
-    @Autowired
-    public TripController(TripService tripService) {
-        this.tripService = tripService;
-    }
+    private final TripService tripService;
 
     @GetMapping("/trips")
     public String trips(Model model,

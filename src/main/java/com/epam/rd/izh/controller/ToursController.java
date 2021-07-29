@@ -1,9 +1,8 @@
 package com.epam.rd.izh.controller;
 
-import com.epam.rd.izh.dto.TourValidDto;
-import com.epam.rd.izh.service.impl.TourServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
+import com.epam.rd.izh.dto.TourDto;
+import com.epam.rd.izh.service.TourService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,19 +13,14 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.time.LocalDateTime;
 import java.util.List;
 
 
 @Controller
+@RequiredArgsConstructor
 public class ToursController {
 
-    TourServiceImpl tourService;
-
-    @Autowired
-    public ToursController(TourServiceImpl tourService) {
-        this.tourService = tourService;
-    }
+    private final TourService tourService;
 
     @GetMapping({"/tours", "/tours/"})
     public String tours(Authentication authentication, ModelMap model,
@@ -51,10 +45,10 @@ public class ToursController {
     }
 
     @PostMapping("/tours/edit_tour")
-    public String editTour(@ModelAttribute("editTourForm") @Valid TourValidDto tourValidDto,
+    public String editTour(@ModelAttribute("editTourForm") @Valid TourDto tourDto,
                            BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         if (!bindingResult.hasErrors()) {
-            tourService.updateTour(tourService.toTour(tourValidDto));
+            tourService.updateTour(tourService.mapToTour(tourDto));
             redirectAttributes.addAttribute("success", "Data updated success.");
         } else {
             redirectAttributes.addAttribute("error", "Form is not valid!");
@@ -87,14 +81,14 @@ public class ToursController {
     }
 
     @PostMapping("/new_tour")
-    public String createNewTour(@ModelAttribute("newTourForm") @Valid TourValidDto tourValidDto,
+    public String createNewTour(@ModelAttribute("newTourForm") TourDto tourDto,
                                 RedirectAttributes redirectAttributes, BindingResult bindingResult) {
         if (!bindingResult.hasErrors()) {
-            if (tourService.findTourByTitle(tourValidDto) != null) {
+            if (tourService.findTourByTitle(tourDto.getTitle()) != null) {
                 redirectAttributes.addAttribute("error", "title already exists, please, create new title");
                 return "redirect:/new_tour";
             } else {
-                tourService.save(tourService.toTour(tourValidDto));
+                tourService.save(tourService.mapToTour(tourDto));
                 redirectAttributes.addAttribute("success", "Data updated success.");
 
                 return "redirect:/tours";
@@ -103,11 +97,5 @@ public class ToursController {
 
         redirectAttributes.addAttribute("error", "Form is not valid!");
         return "redirect:/new_tour";
-    }
-
-    @GetMapping("/temp")
-    public void temp(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime time) {
-
-        System.out.println(time);
     }
 }

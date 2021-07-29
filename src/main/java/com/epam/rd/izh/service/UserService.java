@@ -5,7 +5,11 @@ import com.epam.rd.izh.dto.UserSettingsDto;
 import com.epam.rd.izh.entity.User;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
+import java.util.List;
+
 public interface UserService {
+
+    List<User> getAll();
 
     User getUserByLogin(String login);
 
@@ -15,9 +19,13 @@ public interface UserService {
 
     void saveUser(UserPasswordDto userPasswordDto);
 
-    boolean hasSameLogin(User user);
+    boolean hasSameLogin(String login);
 
     User getUserById(Integer id);
 
     boolean checkPassword(UserPasswordDto userPasswordDto);
+
+    UserPasswordDto getUserPasswordDto(Integer id);
+
+    UserPasswordDto getUserPasswordDto(String login);
 }

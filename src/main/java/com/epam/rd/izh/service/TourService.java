@@ -1,6 +1,6 @@
 package com.epam.rd.izh.service;
 
-import com.epam.rd.izh.dto.TourValidDto;
+import com.epam.rd.izh.dto.TourDto;
 import com.epam.rd.izh.entity.Tour;
 
 import java.util.List;
@@ -15,13 +15,13 @@ public interface TourService {
 
     List<List<Object[]>> getAllTourGroups4(String direction);
 
-    Tour toTour(TourValidDto tourValidDto);
+    Tour mapToTour(TourDto tourDto);
 
     void delete(Integer id);
 
     void save(Tour tour);
 
-    Tour findTourByTitle(TourValidDto tourValidDto);
+    Tour findTourByTitle(String title);
 
     Tour findTourById(Integer id);
 }

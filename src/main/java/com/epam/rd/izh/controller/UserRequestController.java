@@ -1,6 +1,8 @@
 package com.epam.rd.izh.controller;
 
+import com.epam.rd.izh.service.UserRequestService;
 import com.epam.rd.izh.service.impl.UserRequestServiceImpl;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
@@ -14,14 +16,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpServletResponse;
 
 @Controller
+@RequiredArgsConstructor
 public class UserRequestController {
 
-    UserRequestServiceImpl service;
-
-    @Autowired
-    public UserRequestController(UserRequestServiceImpl service) {
-        this.service = service;
-    }
+    private final UserRequestService service;
 
     @GetMapping("/user_request")
     public String clientRegOnTrip(@RequestParam(required = false) String[] checkbox,

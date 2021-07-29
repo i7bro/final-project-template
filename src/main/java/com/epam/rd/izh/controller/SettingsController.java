@@ -2,7 +2,9 @@ package com.epam.rd.izh.controller;
 
 import com.epam.rd.izh.dto.UserSettingsDto;
 import com.epam.rd.izh.entity.User;
+import com.epam.rd.izh.service.UserService;
 import com.epam.rd.izh.service.impl.UserServiceImpl;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -11,14 +13,10 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/settings")
+@RequiredArgsConstructor
 public class SettingsController {
 
-    UserServiceImpl userService;
-
-    @Autowired
-    public SettingsController(UserServiceImpl userService) {
-        this.userService = userService;
-    }
+    private final UserService userService;
 
     @GetMapping
     public String viewSettings(@RequestParam(required = false) String status,
