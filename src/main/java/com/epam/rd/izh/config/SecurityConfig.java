@@ -1,6 +1,8 @@
 package com.epam.rd.izh.config;
 
 import com.epam.rd.izh.service.UserDetailsServiceMapper;
+import com.epam.rd.izh.util.Role;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,96 +16,72 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-  @Autowired
-  private UserDetailsServiceMapper userDetailsService;
+    private final UserDetailsServiceMapper userDetailsService;
 
-  /**
-   * configure методы определяют настройку Spring Security.
-   */
-  @Override
-  protected void configure(HttpSecurity http) throws Exception {
-    http
-        /**
-         * Список всех энд-пойнтов, требующих особой политики авторизации.
-         * /login доступен только неавторизованным пользователям.
-         * /registration и входящие в него энд-пойнты доступны всем пользователям.
-         * Сюда можно добавить свои энд-пойнты, спецефические для выбранного проекта.
-         */
-        .authorizeRequests()
-        .antMatchers("/login").anonymous()
-        .antMatchers("/registration").permitAll()
-        .antMatchers("/registration/**").permitAll()
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http
+                .authorizeRequests()
+                .antMatchers("/login").anonymous()
+                .antMatchers("/registration").permitAll()
+                .antMatchers("/registration/**").permitAll()
+                .antMatchers("/new_tour").hasRole(Role.ADMIN.name())
+                .antMatchers("/tours/edit_tour").hasRole(Role.ADMIN.name())
+                .antMatchers("/tours/delete/**").hasRole(Role.ADMIN.name())
+                .antMatchers("/trips").hasAnyRole(Role.ADMIN.name())
+                .antMatchers("/trips/**").hasAnyRole(Role.ADMIN.name())
+                .antMatchers("/new_trip").hasAnyRole(Role.ADMIN.name())
+                .antMatchers("/new_trip/**").hasAnyRole(Role.ADMIN.name())
+                .antMatchers("/trips/edit").hasAnyRole(Role.ADMIN.name())
+                .antMatchers("/trips/delete/**").hasAnyRole(Role.ADMIN.name())
 
-        /**
-         * Открытие доступа к ресурсным пакетам:
-         * /webapp/css
-         * /webapp/js
-         * /webapp/images
-         * /webapp/fonts
-         */
-        .antMatchers("/css/**").permitAll()
-        .antMatchers("/js/**").permitAll()
-        .antMatchers("/images/**").permitAll()
-        .antMatchers("/fonts/**").permitAll()
+                .antMatchers("/css/**").permitAll()
+                .antMatchers("/js/**").permitAll()
+                .antMatchers("/img/**").permitAll()
 
-        /**
-         * Любой реквест, кроме перечисленных выше, доступен лишь авторизованному пользователю.
-         * Неавторизованный пользователь будет переброшен на "/login".
-         */
-        .anyRequest().authenticated()
+                .anyRequest().authenticated()
+                .and()
 
-        /**
-         * отключение настройки csrf.
-         */
-        .and()
-        .csrf().disable()
+                .httpBasic()
+                .and()
 
-        /**
-         * Настройка логики страницы логина.
-         * Обратить внимание на переход страницы в случае успешной авторизации.
-         */
-        .formLogin()
-        .loginPage("/login")
-        .loginProcessingUrl("/login/process")
-        .defaultSuccessUrl("/")
-        .failureUrl("/login?error")
-        .usernameParameter("login")
-        .passwordParameter("password")
+                .formLogin()
+                .loginPage("/login")
+                .loginProcessingUrl("/login/process")
+                .defaultSuccessUrl("/")
+                .failureUrl("/login?error")
+                .usernameParameter("login")
+                .passwordParameter("password")
 
-        /**
-         * Включение функции выхода из текущей сессии.
-         */
-        .and()
-        .logout();
-  }
+                .and()
+                .logout()
+                .invalidateHttpSession(true)
+                .clearAuthentication(true)
+                .deleteCookies("JSESSIONID")
 
-  @Override
-  protected void configure(AuthenticationManagerBuilder authentication) {
-    authentication.authenticationProvider(authProvider());
-  }
 
-  /**
-   * Класс, обеспечивающий механизм авторизации. Принимает в себя реализацию сервиса авторизации UserDetailsService
-   * и механизм шифрования пароля (реализацию PasswordEncoder).
-   * Итоговый бин DaoAuthenticationProvider добавляется в контекст приложения и обеспечивает основную
-   * логику Spring Security.
-   */
-  @Bean
-  public DaoAuthenticationProvider authProvider() {
-    DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-    authProvider.setUserDetailsService(userDetailsService);
-    authProvider.setPasswordEncoder(passwordEncoder());
-    return authProvider;
-  }
+                .and()
+                .csrf().disable();
+    }
 
-  /**
-   * Механизм шифрования пароля, реализующий интерфейс PasswordEncoder. В данном примере использован
-   * BCryptPasswordEncoder, можно написать свою реализацию, создав собственный класс шифрования.
-   */
-  @Bean
-  public PasswordEncoder passwordEncoder() {
-    return new BCryptPasswordEncoder();
-  }
+    @Override
+    protected void configure(AuthenticationManagerBuilder authentication) {
+        authentication.authenticationProvider(authProvider());
+    }
+
+    @Bean
+    public DaoAuthenticationProvider authProvider() {
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+        authProvider.setUserDetailsService(userDetailsService);
+        authProvider.setPasswordEncoder(passwordEncoder());
+        return authProvider;
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 }

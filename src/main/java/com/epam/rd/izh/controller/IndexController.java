@@ -1,23 +1,26 @@
 package com.epam.rd.izh.controller;
 
-import static com.epam.rd.izh.util.StringConstants.ENG_GREETING;
-
-import com.epam.rd.izh.dto.Message;
+import com.epam.rd.izh.service.UserService;
+import com.epam.rd.izh.service.impl.UserServiceImpl;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
+@RequiredArgsConstructor
 public class IndexController {
 
-  @GetMapping("/")
-  public String login(Authentication authentication, Model model) {
-    Message greetingMessage = new Message();
-    greetingMessage.setMessage(ENG_GREETING + authentication.getName());
+  private final UserService userService;
 
-    model.addAttribute("message", greetingMessage.getMessage());
-    return "index";
+  @GetMapping({"/", "/main"})
+  public String login(Authentication authentication, Model model) {
+
+    model.addAttribute("user", authentication.getName());
+    model.addAttribute("role", authentication.getAuthorities().toArray()[0].toString());
+    return "main";
   }
 
 }

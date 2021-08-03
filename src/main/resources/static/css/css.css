@@ -1,0 +1,102 @@
+body {
+    margin-top: 55px;
+    padding-bottom: 100px;
+}
+
+#p-img {
+    font-size: 1.5vw;
+}
+
+#h-img {
+    font-size: 1.7vw;
+}
+
+#btn-img {
+    margin-bottom: 0;
+}
+
+.tour-color {
+    color: red;
+}
+
+#registrationBtn, #returnBtn {
+    margin-left: 15px;
+}
+
+.modal-header {
+    background-color: #fafafa;
+}
+
+.modal-body table input, textarea {
+    width: 500px;
+}
+
+@media(max-width: 991px) {
+    .modal-body table input, textarea {
+        width: 300px;
+    }
+}
+
+@media(max-width: 576px) {
+    .modal-body table input, textarea {
+        width: 50vw;
+    }
+}
+
+#footer{
+    position: fixed;
+    left: 0; bottom: 0;
+    background: #fafafa;
+    color: black;
+    width: 100%;
+    text-align: center;
+    margin-top: 50px;
+}
+
+#footer a {
+    text-decoration: none;
+}
+
+li {
+    list-style-type: none;
+}
+
+li a button {
+    width: 80px;
+}
+
+#checkboxTrip {
+    width: 20px;
+}
+
+thead {
+    background-color: #fafafa;
+}
+
+.row {
+    margin-bottom: 2vh;
+}
+
+.pop-up {
+    height: 7vh;
+    background-color: #ffdc99;
+    border-radius: 5px;
+    text-align: center;
+    line-height: 3em;
+    position: absolute;
+    top: 50px;
+    left: 0;
+    width: 100%;
+}
+
+.pop-up-error {
+    height: 7vh;
+    background-color: red;
+    border-radius: 5px;
+    text-align: center;
+    line-height: 3em;
+    position: absolute;
+    top: 50px;
+    left: 0;
+    width: 100%;
+}
